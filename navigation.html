@@ -1,0 +1,64 @@
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+
+export default function Navigation() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <nav className="fixed top-0 w-full bg-black/80 backdrop-blur-md border-b border-gray-800/50 z-50">
+      <div className="max-w-6xl mx-auto px-6 py-4">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <a href="#" className="flex items-center">
+            <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/670e65a8c_Whitelogo-nobackground.png" alt="Beyryl Logo" className="h-7" />
+          </a>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            <a href="#product" className="text-gray-300 hover:text-white transition-colors">
+              Product
+            </a>
+            <a href="#features" className="text-gray-300 hover:text-white transition-colors">
+              Features
+            </a>
+            <a href="#contact" className="text-gray-300 hover:text-white transition-colors">
+              Contact
+            </a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+              LinkedIn
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-gray-300 hover:text-white"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-black border-b border-gray-800 px-6 py-4">
+            <div className="flex flex-col gap-4">
+              <a href="#product" className="text-gray-300 hover:text-white transition-colors">
+                Product
+              </a>
+              <a href="#features" className="text-gray-300 hover:text-white transition-colors">
+                Features
+              </a>
+              <a href="#contact" className="text-gray-300 hover:text-white transition-colors">
+                Contact
+              </a>
+              <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+}
