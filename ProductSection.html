@@ -1,0 +1,87 @@
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Brain, Database, Zap, ChevronRight } from "lucide-react";
+
+export default function ProductSection() {
+  const scrollToForm = () => {
+    const element = document.querySelector('input[type="email"]');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      element.focus();
+    }
+  };
+
+  return (
+    <section id="product" className="py-20 px-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Meet our first
+            <span className="bg-gradient-to-r from-[#81b622] to-[#ecf87f] bg-clip-text text-transparent">
+              {" "}breakthrough
+            </span>
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Our RAG (Retrieval-Augmented Generation) solution revolutionizes how businesses 
+            interact with their data and knowledge base.
+          </p>
+        </div>
+
+        {/* Main Product Card */}
+        <div className="relative">
+          <Card className="bg-gradient-to-br from-gray-900 to-black border-gray-700 overflow-hidden">
+            <CardContent className="p-8 md:p-12">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                  <div className="inline-flex items-center gap-2 bg-[#81b622]/10 border border-[#81b622]/20 rounded-full px-4 py-2 mb-6">
+                    <Brain className="w-4 h-4 text-[#81b622]" />
+                    <span className="text-sm text-[#ecf87f] font-medium">RAG Solution</span>
+                  </div>
+                  
+                  <h3 className="text-3xl md:text-4xl font-bold mb-4 text-gray-300">
+                    Intelligent Knowledge Retrieval
+                  </h3>
+                  
+                  <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+                    Transform your business data into actionable insights with our advanced 
+                    RAG technology. Connect, analyze, and retrieve information like never before.
+                  </p>
+
+                  <ul className="space-y-3 mb-8">
+                    <li className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-[#81b622] rounded-full"></div>
+                      <span className="text-gray-300">Real-time data processing</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-[#81b622] rounded-full"></div>
+                      <span className="text-gray-300">Natural language queries</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-[#81b622] rounded-full"></div>
+                      <span className="text-gray-300">Enterprise-grade security</span>
+                    </li>
+                  </ul>
+
+                  <Button 
+                    onClick={scrollToForm}
+                    className="bg-gradient-to-r from-[#59981a] to-[#81b622] hover:from-[#3d550c] hover:to-[#59981a] text-white border-none group"
+                  >
+                    Request Access
+                    <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </div>
+
+                {/* Visual Element */}
+                <div className="relative">
+                  <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/1de4cc79a_browser.png" alt="Beyryl RAG Solution" className="rounded-lg shadow-2xl shadow-[#81b622]/10 border border-gray-700" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </section>
+  );
+}
