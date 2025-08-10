@@ -1,0 +1,72 @@
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Shield, Brain, Database, Users } from "lucide-react";
+
+const features = [
+  {
+    icon: Shield,
+    title: "Zero-trust architecture",
+    description: "Ensuring every request is authenticated, authorized, and encrypted for maximum security.",
+    color: "from-blue-500 to-indigo-600"
+  },
+  {
+    icon: Brain,
+    title: "Smart Learning",
+    description: "Continuously improves and adapts to your business patterns and requirements.",
+    color: "from-[#59981a] to-[#81b622]"
+  },
+  {
+    icon: Database,
+    title: "Data Transformation",
+    description: "Establish a dedicated data lake to unify, process, and prepare your data for AI analysis.",
+    color: "from-red-500 to-orange-500"
+  },
+  {
+    icon: Users,
+    title: "Team Collaboration",
+    description: "Built for teams with role-based access, sharing, and collaborative workflows.",
+    color: "from-cyan-500 to-teal-600"
+  }
+];
+
+export default function FeaturesGrid() {
+  return (
+    <section id="features" className="py-20 px-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold">
+            Why choose
+            <span className="bg-gradient-to-r from-[#81b622] to-[#ecf87f] bg-clip-text text-transparent">
+              {" "}Beyryl
+            </span>
+          </h2>
+        </div>
+
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-2 gap-8">
+          {features.map((feature, index) => (
+            <Card 
+              key={index}
+              className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-700 hover:border-gray-600 transition-all duration-300 hover:scale-105 group"
+            >
+              <CardHeader className="pb-4">
+                <div className={`w-12 h-12 bg-gradient-to-r ${feature.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <feature.icon className="w-6 h-6 text-white" />
+                </div>
+                <CardTitle className="text-xl font-semibold text-white">
+                  {feature.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-300 leading-relaxed">
+                  {feature.description}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
