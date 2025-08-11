@@ -86,6 +86,21 @@ class EmailHandler {
       return;
     }
 
+    // Check for business email (exclude public domains)
+    const email = emailInput.value.toLowerCase();
+    const publicDomains = [
+      'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com',
+      'icloud.com', 'me.com', 'mac.com', 'live.com', 'msn.com',
+      'yahoo.co.uk', 'yahoo.ca', 'yahoo.in', 'googlemail.com',
+      'protonmail.com', 'tutanota.com', 'zoho.com', 'mail.com'
+    ];
+
+    const domain = email.split('@')[1];
+    if (publicDomains.includes(domain)) {
+      this.showMessage(form, false, 'Please use your work email address. Personal email addresses are not accepted.');
+      return;
+    }
+
     // Update button to show loading state
     submitButton.textContent = 'Sending...';
     submitButton.disabled = true;
