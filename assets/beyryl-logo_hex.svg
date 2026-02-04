@@ -1,0 +1,15 @@
+<svg width="1200" height="1200" viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="beyryl-hex-gradient" x1="240" y1="960" x2="960" y2="240" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#18c1a1" />
+      <stop offset="100%" stop-color="#7b5ef8" />
+    </linearGradient>
+  </defs>
+  <path
+    d="M600 240 L911.77 420 L911.77 780 L600 960 L288.23 780 L288.23 420 Z"
+    stroke="url(#beyryl-hex-gradient)"
+    stroke-width="32"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
