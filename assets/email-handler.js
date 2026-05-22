@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(() => {
     // Find and attach handlers to all forms
     const heroForm = document.querySelector('#hero form');
-    const ctaForm = document.querySelector('#contact form');
+    const ctaForm = document.querySelector('#partners form');
     
     if (heroForm) {
       heroForm.addEventListener('submit', (e) => emailHandler.handleFormSubmit(e, 'hero'));

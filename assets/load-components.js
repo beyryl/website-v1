@@ -12,7 +12,7 @@ async function include(id, path) {
 window.addEventListener("DOMContentLoaded", () => {
   include("nav", "components/Navigation.html");
   include("hero", "components/Hero.html");
-  include("features", "components/FeaturesGrid.html");
-  include("product", "components/ProductSection.html");
-  include("cta", "components/CallToAction.html");
+  include("identity", "components/ProductSection.html");
+  include("delivery", "components/FeaturesGrid.html");
+  include("partnership", "components/CallToAction.html");
 });
