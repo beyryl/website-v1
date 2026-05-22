@@ -9,10 +9,15 @@ async function include(id, path) {
   }
 }
 
+function includeFirst(ids, path) {
+  const id = ids.find((candidate) => document.getElementById(candidate));
+  if (id) include(id, path);
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   include("nav", "components/Navigation.html");
   include("hero", "components/Hero.html");
-  include("identity", "components/ProductSection.html");
-  include("delivery", "components/FeaturesGrid.html");
-  include("partnership", "components/CallToAction.html");
+  includeFirst(["identity", "product"], "components/ProductSection.html");
+  includeFirst(["delivery", "features"], "components/FeaturesGrid.html");
+  includeFirst(["partnership", "cta"], "components/CallToAction.html");
 });
