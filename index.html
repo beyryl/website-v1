@@ -34,12 +34,57 @@
     <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center w-full gap-2">
       <span>© 2026 Beyryl</span>
       <a href="/privacy" class="text-gray-400 hover:text-white sm:ml-6">Privacy</a>
-      <span class="sm:ml-auto text-gray-500 sm:text-right w-full sm:w-auto">Harvard Innovation Labs - Member</span>
+
+      <!-- Partner carousel (panels) -->
+      <div class="sm:ml-auto w-full sm:w-auto">
+        <div id="partner-carousel" class="relative w-full max-w-md">
+          <div class="carousel-track flex gap-4 transition-transform duration-500" style="transform: translateX(0%);">
+            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-gray-500 bg-black/30 rounded-md">Harvard Innovation Labs member</div>
+            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-gray-500 bg-black/30 rounded-md">Built-in Colorado</div>
+            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-gray-500 bg-black/30 rounded-md">Microsoft Partner</div>
+            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-gray-500 bg-black/30 rounded-md">AWS Partner</div>
+            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-gray-500 bg-black/30 rounded-md">Google Partner</div>
+            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-gray-500 bg-black/30 rounded-md">Anthropic Partner</div>
+          </div>
+        </div>
+      </div>
     </div>
   </footer>
 
   <!-- Component loader script -->
   <script src="assets/load-components.js?v=2.2"></script>
   <script src="assets/email-handler.js?v=2.1"></script>
+  <script>
+    // Simple carousel rotator for partner panels
+    (function(){
+      const track = document.querySelector('#partner-carousel .carousel-track');
+      if(!track) return;
+      const items = Array.from(track.children);
+      const total = items.length;
+      let index = 0;
+      // set each item width equal to track container width
+      function resize(){
+        const containerWidth = track.parentElement.clientWidth;
+        items.forEach(item => item.style.width = containerWidth + 'px');
+        track.style.transform = `translateX(-${index * containerWidth}px)`;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+      // auto-advance
+      const interval = 3000;
+      let timer = setInterval(()=>{
+        index = (index + 1) % total;
+        const w = items[0].clientWidth || track.parentElement.clientWidth;
+        track.style.transform = `translateX(-${index * w}px)`;
+      }, interval);
+      // pause on hover
+      track.parentElement.addEventListener('mouseenter', ()=> clearInterval(timer));
+      track.parentElement.addEventListener('mouseleave', ()=> timer = setInterval(()=>{
+        index = (index + 1) % total;
+        const w = items[0].clientWidth || track.parentElement.clientWidth;
+        track.style.transform = `translateX(-${index * w}px)`;
+      }, interval));
+    })();
+  </script>
 </body>
 </html>
