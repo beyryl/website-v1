@@ -6,14 +6,14 @@
   <title>Beyryl</title>
   <!-- TailwindCSS via CDN for styling -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Set browser UI bars to match dark layout -->
-  <meta name="theme-color" content="#000000" />
-  <meta name="color-scheme" content="dark" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <!-- Set browser UI bars for light layout -->
+  <meta name="theme-color" content="#f3f5f9" />
+  <meta name="color-scheme" content="light" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <!-- Updated favicon to Beyryl Hex SVG -->
   <link rel="icon" type="image/svg+xml" href="assets/beyryl-logo_hex.svg" />
 </head>
-<body class="bg-black text-white">
+<body class="bg-[#f3f5f9] text-slate-900">
   <!-- Navigation will be injected here -->
   <header id="nav" class="sticky top-0 z-50"></header>
 
@@ -30,21 +30,21 @@
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-gray-800 py-8 text-sm text-gray-400">
+  <footer class="border-t border-slate-200 py-8 text-sm text-slate-600 bg-[#eef2f8]">
     <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center w-full gap-2">
       <span>© 2026 Beyryl</span>
-      <a href="/privacy" class="text-gray-400 hover:text-white sm:ml-6">Privacy</a>
+      <a href="/privacy" class="text-slate-600 hover:text-slate-900 sm:ml-6">Privacy</a>
 
       <!-- Partner carousel (panels) -->
       <div class="sm:ml-auto w-full sm:w-[280px] sm:flex-none sm:pl-8">
         <div id="partner-carousel" class="relative w-full overflow-hidden">
           <div class="carousel-track flex transition-transform duration-500" style="transform: translateX(0%);">
-            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-gray-500 bg-black/30 rounded-md flex items-center justify-center text-center">Harvard Innovation Labs member</div>
-            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-gray-500 bg-black/30 rounded-md flex items-center justify-center text-center">Built-in Colorado</div>
-            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-gray-500 bg-black/30 rounded-md flex items-center justify-center text-center">Microsoft Partner</div>
-            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-gray-500 bg-black/30 rounded-md flex items-center justify-center text-center">AWS Partner</div>
-            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-gray-500 bg-black/30 rounded-md flex items-center justify-center text-center">Google Partner</div>
-            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-gray-500 bg-black/30 rounded-md flex items-center justify-center text-center">Anthropic Partner</div>
+            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-slate-600 bg-white border border-slate-200 rounded-md flex items-center justify-center text-center">Harvard Innovation Labs member</div>
+            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-slate-600 bg-white border border-slate-200 rounded-md flex items-center justify-center text-center">Built-in Colorado</div>
+            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-slate-600 bg-white border border-slate-200 rounded-md flex items-center justify-center text-center">Microsoft Partner</div>
+            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-slate-600 bg-white border border-slate-200 rounded-md flex items-center justify-center text-center">AWS Partner</div>
+            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-slate-600 bg-white border border-slate-200 rounded-md flex items-center justify-center text-center">Google Partner</div>
+            <div class="carousel-item flex-shrink-0 w-full px-4 py-2 text-slate-600 bg-white border border-slate-200 rounded-md flex items-center justify-center text-center">Anthropic Partner</div>
           </div>
         </div>
       </div>
