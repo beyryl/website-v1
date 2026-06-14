@@ -1,5 +1,5 @@
 <!-- Navigation Bar Fragment -->
-<nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-slate-200 z-50">
+<nav id="site-nav" class="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-slate-200 z-50 transition-all duration-300">
   <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
     <!-- Logo + Brand Name -->
     <a href="#" class="flex items-center gap-3 group">
@@ -8,9 +8,9 @@
     </a>
     <!-- Desktop navigation links -->
     <div class="hidden md:flex items-center gap-8 text-slate-600">
-      <a href="#about" class="hover:text-slate-800">About us</a>
-      <a href="#problems" class="hover:text-slate-800">Solutions</a>
-      <a href="#partners" class="hover:text-slate-800">Partners</a>
+      <a href="#about" class="nav-link hover:text-slate-800 transition-colors">About us</a>
+      <a href="#problems" class="nav-link hover:text-slate-800 transition-colors">Solutions</a>
+      <a href="#partners" class="nav-link hover:text-slate-800 transition-colors">Partners</a>
     </div>
   </div>
 </nav>
