@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Beyryl</title>
+  <!-- TailwindCSS via CDN for styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Set browser UI bars for light layout -->
+  <meta name="theme-color" content="#f3f5f9" />
+  <meta name="color-scheme" content="light" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <!-- Updated favicon to Beyryl Hex SVG -->
+  <link rel="icon" type="image/svg+xml" href="assets/beyryl-logo_hex.svg" />
+  <style>
+    .nav-link {
+      position: relative;
+      color: #475569;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.45rem;
+      width: 100%;
+      height: 2px;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #2cc8d6, #6675e8);
+      opacity: 0;
+      transform: scaleX(0.35);
+      transform-origin: center;
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+    .nav-link.is-active {
+      color: #334155;
+      font-weight: 600;
+    }
+    .nav-link.is-active::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+    .modern-btn {
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+    .modern-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(91, 168, 234, 0.28);
+    }
+    .modern-btn:focus-visible {
+      outline: 2px solid rgba(91, 168, 234, 0.45);
+      outline-offset: 2px;
+    }
+    .modern-card {
+      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+    .modern-card:hover {
+      transform: translateY(-2px);
+      border-color: #b9d2fb;
+      box-shadow: 0 10px 24px rgba(71, 85, 105, 0.08);
+    }
+    .reveal-ready {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    .reveal-in {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 650ms ease, transform 650ms ease;
+    }
+    .carousel-item {
+      opacity: 0.55;
+      transition: opacity 360ms ease;
+    }
+    .carousel-item.is-visible {
+      opacity: 1;
+    }
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 9999px;
+      background: #cbd5e1;
+      border: none;
+      padding: 0;
+      transition: transform 200ms ease, background-color 200ms ease;
+    }
+    .carousel-dot.is-active {
+      background: #6675e8;
+      transform: scale(1.25);
+    }
+  </style>
+</head>
+<body class="bg-[#f3f5f9] text-slate-800">
+  <!-- Navigation will be injected here -->
+  <header id="nav" class="sticky top-0 z-50"></header>
+
+  <!-- Main content area -->
+  <main class="min-h-screen">
+    <!-- Hero section -->
+    <section id="hero"></section>
+    <!-- Identity and foundation sections -->
+    <section id="identity"></section>
+    <!-- Problems and solutions sections -->
+    <section id="delivery"></section>
+    <!-- Partnership section -->
+    <section id="partnership"></section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 py-8 text-sm text-slate-600 bg-[#eef2f8]">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center w-full gap-2">
+      <span>© 2026 Beyryl</span>
+      <a href="/privacy" class="text-slate-600 hover:text-slate-800 sm:ml-6">Privacy</a>
+
+      <!-- Partner carousel (panels) -->
+      <div class="sm:ml-auto w-full sm:w-[280px] sm:flex-none sm:pl-8">
+        <div id="partner-carousel" class="relative w-full overflow-hidden">
+          <div class="carousel-track flex" style="transform: translateX(0%); transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <div class="carousel-item flex-shrink-0 w-full min-h-10 px-4 py-2 text-slate-700 bg-white border border-slate-200 rounded-md flex items-center justify-center text-center">Harvard Innovation Labs member</div>
+            <div class="carousel-item flex-shrink-0 w-full min-h-10 px-4 py-2 text-slate-700 bg-white border border-slate-200 rounded-md flex items-center justify-center text-center">Built-in Colorado</div>
+            <div class="carousel-item flex-shrink-0 w-full min-h-10 px-4 py-2 text-slate-700 bg-white border border-slate-200 rounded-md flex items-center justify-center text-center">Microsoft Partner</div>
+            <div class="carousel-item flex-shrink-0 w-full min-h-10 px-4 py-2 text-slate-700 bg-white border border-slate-200 rounded-md flex items-center justify-center text-center">AWS Partner</div>
+            <div class="carousel-item flex-shrink-0 w-full min-h-10 px-4 py-2 text-slate-700 bg-white border border-slate-200 rounded-md flex items-center justify-center text-center">Google Partner</div>
+            <div class="carousel-item flex-shrink-0 w-full min-h-10 px-4 py-2 text-slate-700 bg-white border border-slate-200 rounded-md flex items-center justify-center text-center">Anthropic Partner</div>
+          </div>
+          <div id="partner-carousel-dots" class="mt-2 flex items-center justify-center gap-2" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Component loader script -->
+  <script src="assets/load-components.js?v=2.2"></script>
+  <script src="assets/email-handler.js?v=2.1"></script>
+  <script>
+    (function () {
+      function initEnhancements() {
+        const nav = document.getElementById('site-nav');
+        const navLinks = nav ? Array.from(nav.querySelectorAll('a.nav-link[href^="#"]')) : [];
+        const about = document.getElementById('about');
+        const problems = document.getElementById('problems');
+        const partners = document.getElementById('partners');
+        const track = document.querySelector('#partner-carousel .carousel-track');
+        if (!nav || navLinks.length === 0 || !about || !problems || !partners || !track) {
+          setTimeout(initEnhancements, 100);
+          return;
+        }
+
+        const sections = { about: about, problems: problems, partners: partners };
+        const dotsRoot = document.getElementById('partner-carousel-dots');
+        const items = Array.from(track.children);
+        const total = items.length;
+        let index = 0;
+        let timer;
+
+        function setActiveNav(targetId) {
+          navLinks.forEach((link) => {
+            const hrefId = link.getAttribute('href').slice(1);
+            link.classList.toggle('is-active', hrefId === targetId);
+          });
+        }
+
+        function updateNavByScroll() {
+          const y = window.scrollY + 140;
+          const problemsTop = sections.problems.offsetTop;
+          const partnersTop = sections.partners.offsetTop;
+
+          if (y >= partnersTop) setActiveNav('partners');
+          else if (y >= problemsTop) setActiveNav('problems');
+          else setActiveNav('about');
+
+          if (window.scrollY > 12) {
+            nav.classList.add('bg-white/95', 'shadow-sm');
+            nav.classList.remove('bg-white/90');
+          } else {
+            nav.classList.add('bg-white/90');
+            nav.classList.remove('bg-white/95', 'shadow-sm');
+          }
+        }
+
+        function updateVisibleItem() {
+          items.forEach((item, i) => item.classList.toggle('is-visible', i === index));
+          if (dotsRoot) {
+            Array.from(dotsRoot.children).forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+          }
+        }
+
+        function moveTo(newIndex) {
+          index = (newIndex + total) % total;
+          const width = track.parentElement.clientWidth;
+          track.style.transform = `translateX(-${index * width}px)`;
+          updateVisibleItem();
+        }
+
+        function resizeCarousel() {
+          const width = track.parentElement.clientWidth;
+          items.forEach((item) => (item.style.width = width + 'px'));
+          moveTo(index);
+        }
+
+        function startCarousel() {
+          clearInterval(timer);
+          timer = setInterval(() => moveTo(index + 1), 3800);
+        }
+
+        if (dotsRoot) {
+          dotsRoot.innerHTML = '';
+          for (let i = 0; i < total; i++) {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'carousel-dot';
+            dot.setAttribute('aria-label', `Show partner ${i + 1}`);
+            dot.addEventListener('click', () => moveTo(i));
+            dotsRoot.appendChild(dot);
+          }
+        }
+
+        const revealTargets = [
+          document.getElementById('about'),
+          document.getElementById('who'),
+          document.getElementById('problems'),
+          document.getElementById('partners')
+        ].filter(Boolean);
+
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('reveal-in');
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.16 }
+          );
+          revealTargets.forEach((el, i) => {
+            el.classList.add('reveal-ready');
+            el.style.transitionDelay = `${i * 90}ms`;
+            observer.observe(el);
+          });
+        }
+
+        resizeCarousel();
+        updateVisibleItem();
+        updateNavByScroll();
+        startCarousel();
+
+        window.addEventListener('resize', resizeCarousel);
+        window.addEventListener('scroll', updateNavByScroll, { passive: true });
+        track.parentElement.addEventListener('mouseenter', () => clearInterval(timer));
+        track.parentElement.addEventListener('mouseleave', startCarousel);
+      }
+
+      window.addEventListener('DOMContentLoaded', initEnhancements);
+    })();
+  </script>
+</body>
+</html>

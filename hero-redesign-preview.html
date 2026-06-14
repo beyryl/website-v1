@@ -3,11 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Beyryl</title>
+  <title>Beyryl Full Redesign Preview</title>
   <meta name="theme-color" content="#f3f5f9" />
-  <meta name="color-scheme" content="light" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <link rel="icon" type="image/svg+xml" href="assets/beyryl-logo_hex.svg" />
   <style>
     :root {
       --bg: #f3f5f9;
@@ -22,16 +19,11 @@
     }
 
     * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       margin: 0;
       background: var(--bg);
       color: var(--ink);
-      font-family: "Sohne", "Avenir Next", "Segoe UI", sans-serif;
+      font-family: "Söhne", "Avenir Next", "Segoe UI", sans-serif;
     }
 
     .hero-shell {
@@ -43,14 +35,6 @@
         var(--bg);
     }
 
-    .top-nav-inner,
-    .hero-inner,
-    .section-inner,
-    .footer-inner {
-      width: min(1180px, 92vw);
-      margin: 0 auto;
-    }
-
     .top-nav {
       position: sticky;
       top: 0;
@@ -58,6 +42,14 @@
       border-bottom: 1px solid var(--line);
       backdrop-filter: blur(8px);
       background: rgba(255,255,255,.8);
+    }
+
+    .top-nav-inner,
+    .hero-inner,
+    .section-inner,
+    .footer-inner {
+      width: min(1180px, 92vw);
+      margin: 0 auto;
     }
 
     .top-nav-inner {
@@ -385,6 +377,7 @@
       font-weight: 600;
     }
 
+
     @media (max-width: 980px) {
       .hero-grid {
         grid-template-columns: 1fr;
@@ -425,29 +418,154 @@
       .partner-ticker {
         margin-left: 0;
       }
+
     }
   </style>
 </head>
 <body>
-  <header id="nav"></header>
+  <div class="hero-shell" id="about">
+    <nav class="top-nav">
+      <div class="top-nav-inner">
+        <a href="#about" class="brand" aria-label="Beyryl home">
+          <img src="assets/beyryl-logo_hex.svg" alt="Beyryl logo" />
+          <span>Beyryl</span>
+        </a>
+        <div class="nav-links">
+          <a href="#about">About us</a>
+          <a href="#problems">Solutions</a>
+          <a href="#partners">Partners</a>
+        </div>
+      </div>
+    </nav>
 
-  <main>
-    <section id="hero"></section>
-    <section id="identity"></section>
-    <section id="delivery"></section>
-    <section id="partnership"></section>
-  </main>
+    <section class="hero-inner">
+      <p class="eyebrow">AI Foundations Platform</p>
+      <div class="hero-grid">
+        <h1>
+          Build your
+          <span class="gradient-word">Frontier Firm</span>
+          <span class="nowrap">with confidence.</span>
+        </h1>
+        <p class="lead">
+          Beyryl unifies private AI infrastructure, business data fabric, and governance controls so partner teams can deploy production AI safely.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <section class="section" id="who">
+    <div class="section-inner">
+      <p class="section-kicker">Who we are</p>
+      <h2 class="section-title"><span class="gradient-word">AI Service Provider</span></h2>
+      <p class="section-copy">Established by cybersecurity operators, law enforcement officers, and data scientists. Beyryl was purpose-built to help IT teams and Managed Service Providers deliver secure AI solutions to their clients.</p>
+
+      <div class="two-grid">
+        <article class="card mini-card">
+          <p class="card-kicker">What we do</p>
+          <h4>AI foundations</h4>
+          <p>We deliver the foundation businesses need to operationalize agentic AI, moving from fragmented experiments to secure, observable, revenue-generating AI services.</p>
+        </article>
+        <article class="card mini-card">
+          <p class="card-kicker">How we do it</p>
+          <h4>Trust &amp; Quality</h4>
+          <p>We establish trust through transparent operations and open communication with our partners. Beyryl delivers quality products for high-performance teams.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="problems">
+    <div class="section-inner">
+      <p class="section-kicker">Problems</p>
+      <h2 class="section-title">AI delivery is fragmented</h2>
+      <p class="section-copy">Technology teams need a turnkey solution to centralize and transform business data for human+agent operations.</p>
+
+      <div class="three-grid">
+        <div class="flow">
+          <article class="card mini-card">
+            <h4>Fragmented infrastructure</h4>
+            <p>AI systems are often scattered across insecure tools and disconnected environments.</p>
+          </article>
+          <div class="flow-arrow">&darr;</div>
+          <article class="card mini-card solution-card">
+            <h4>Private AI Infrastructure</h4>
+            <p>Establish dedicated AI infrastructure for secure and reliable AI operations.</p>
+          </article>
+        </div>
+
+        <div class="flow">
+          <article class="card mini-card">
+            <h4>Siloed business data</h4>
+            <p>Client knowledge is not centralized, transformed, or ready for agentic workflows.</p>
+          </article>
+          <div class="flow-arrow">&darr;</div>
+          <article class="card mini-card solution-card">
+            <h4>AI-ready data fabric</h4>
+            <p>Centralize and transform business data before it powers AI workflows.</p>
+          </article>
+        </div>
+
+        <div class="flow">
+          <article class="card mini-card">
+            <h4>Missing guardrails</h4>
+            <p>Security and compliance teams need operational oversight and control-enforcement for human+agent work.</p>
+          </article>
+          <div class="flow-arrow">&darr;</div>
+          <article class="card mini-card solution-card">
+            <h4>Modern governance engine</h4>
+            <p>Enforce security, safety, and compliance controls across human+agent operations.</p>
+          </article>
+        </div>
+      </div>
+
+      <div style="margin-top:84px;">
+        <p class="section-kicker">Solutions</p>
+        <h2 class="section-title">A secure AI foundation for every tenant</h2>
+        <p class="section-copy">A unified AI platform built for IT teams, Managed Service Providers, and the clients they serve. From fragmented AI experiments to secure, observable, revenue-generating AI services.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="partners">
+    <div class="section-inner">
+      <div class="partner-wrap">
+        <div class="partner-inner">
+          <span class="pill">Partner with us</span>
+          <h2 class="section-title" style="max-width: 15ch; margin: 0 auto;">Ready to start your Frontier Firm journey?</h2>
+          <p class="section-copy" style="margin-top: 18px;">Beyryl enables partners to effectively deploy and manage AI infrastructure for the modern enterprise and frontier firm.</p>
+
+          <div class="three-grid" style="margin-top: 34px; text-align: left;">
+            <article class="card mini-card">
+              <h4>Secure &amp; Transparent</h4>
+              <p>Secure infrastructure with complete visibility across AI systems.</p>
+            </article>
+            <article class="card mini-card">
+              <h4>Built for Delivery teams</h4>
+              <p>Tooling designed for Managed Service Providers and delivery teams.</p>
+            </article>
+            <article class="card mini-card">
+              <h4>Human + agent teams</h4>
+              <p>Reshape organizational structure around governed agentic work.</p>
+            </article>
+          </div>
+
+          <form class="form-row">
+            <input class="email" type="email" placeholder="Enter your work email" />
+            <button class="btn" type="button">Request Access</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <div class="footer-inner">
       <span>&copy; 2026 Beyryl</span>
-      <a href="/privacy">Privacy</a>
+      <a href="#">Privacy</a>
       <div class="partner-ticker" id="partner-ticker">Harvard Innovation Labs member</div>
     </div>
   </footer>
 
-  <script src="assets/load-components.js?v=2.2"></script>
-  <script src="assets/email-handler.js?v=2.1"></script>
   <script>
     (function () {
       const ticker = document.getElementById('partner-ticker');

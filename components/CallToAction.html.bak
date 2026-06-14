@@ -1,0 +1,43 @@
+<section id="partners" class="py-20 px-6 bg-[#f3f5f9] text-slate-800 scroll-mt-28">
+  <div class="max-w-4xl mx-auto">
+    <div class="relative bg-gradient-to-br from-[#eaf3ff] via-[#f5f8ff] to-white border border-[#c7dbff] rounded-lg overflow-hidden p-12 text-center shadow-sm">
+      <!-- Background decorative circles -->
+      <div class="absolute top-10 left-10 w-20 h-20 bg-[#5ba8ea]/20 rounded-full blur-xl"></div>
+      <div class="absolute bottom-10 right-10 w-32 h-32 bg-[#6675e8]/20 rounded-full blur-xl"></div>
+      <div class="relative z-10">
+        <div class="inline-flex items-center gap-2 bg-gradient-to-r from-[#dff4f7] to-[#e6eeff] border border-[#c7dbff] rounded-full px-4 py-2 mb-6">
+          <span class="text-sm text-[#4a6387] font-medium">Partner with us</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-semibold mb-6">
+          Ready to start your Frontier Firm journey?
+        </h2>
+        <p class="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+          Beyryl enables partners to effectively deploy and manage AI infrastructure for the modern enterprise and frontier firm.
+        </p>
+        <div class="grid md:grid-cols-3 gap-4 mb-10 text-left text-slate-600">
+          <div class="modern-card bg-white/90 border border-slate-200 rounded-lg p-4"><span class="font-semibold text-slate-800">Secure &amp; Transparent</span><br>Secure infrastructure with complete visibility across AI systems.</div>
+          <div class="modern-card bg-white/90 border border-slate-200 rounded-lg p-4"><span class="font-semibold text-slate-800">Built for Delivery teams</span><br>Tooling designed for Managed Service Providers and delivery teams.</div>
+          <div class="modern-card bg-white/90 border border-slate-200 rounded-lg p-4"><span class="font-semibold text-slate-800">Human + agent teams</span><br>Reshape organizational structure around governed agentic work.</div>
+        </div>
+        <form class="max-w-md mx-auto mb-10">
+          <div class="flex flex-col sm:flex-row gap-3">
+            <input type="email" placeholder="Enter your work email" class="flex-1 bg-white border border-slate-300 text-slate-800 placeholder-slate-400 focus:border-[#5ba8ea] focus:outline-none px-4 py-2 rounded-md" required>
+            <button type="submit" class="modern-btn bg-gradient-to-r from-[#2cc8d6] to-[#6675e8] hover:from-[#26b6c2] hover:to-[#5a68d4] text-white px-6 py-2 rounded-md whitespace-nowrap">
+              Request Access
+            </button>
+          </div>
+        </form>
+        <!-- 
+        <div class="mt-12 pt-8 border-t border-gray-800">
+          <p class="text-sm text-gray-400 mb-4">Backed by industry experts</p>
+          <div class="flex justify-center items-center gap-8 opacity-60">
+            <div class="text-2xl font-bold text-gray-500">AI Ventures</div>
+            <div class="text-2xl font-bold text-gray-500">Tech Leaders</div>
+            <div class="text-2xl font-bold text-gray-500">MSP Network</div>
+          </div>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+</section>

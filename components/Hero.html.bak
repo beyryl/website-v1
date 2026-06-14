@@ -1,0 +1,16 @@
+<section id="about" class="relative pt-32 pb-20 px-6 bg-gradient-to-b from-[#f7f9fc] to-[#f3f5f9] text-slate-800">
+  <div class="max-w-6xl mx-auto text-center">
+    <h1 class="text-7xl md:text-8xl font-semibold mb-6 tracking-tight mt-12">
+      <span class="bg-gradient-to-r from-[#2cc8d6] via-[#5ba8ea] to-[#6675e8] bg-clip-text text-transparent">Beyryl</span>
+    </h1>
+    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight mb-10 max-w-5xl mx-auto text-slate-700">
+      Beyryl provides private AI infrastructure, a data fabric layer, and a governance engine purpose-built for Human + Agent operations.
+    </h2>
+    <form class="max-w-md mx-auto mb-10">
+      <div class="flex flex-col sm:flex-row gap-3">
+        <input type="email" placeholder="Enter your work email" class="flex-1 bg-white border border-slate-300 text-slate-800 placeholder-slate-400 focus:border-[#5ba8ea] focus:outline-none px-4 py-2 rounded-md" required>
+        <button type="submit" class="modern-btn bg-gradient-to-r from-[#2cc8d6] to-[#6675e8] hover:from-[#26b6c2] hover:to-[#5a68d4] text-white px-6 py-2 rounded-md whitespace-nowrap transition-colors">Request Access</button>
+      </div>
+    </form>
+  </div>
+</section>
