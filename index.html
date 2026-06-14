@@ -107,7 +107,9 @@
 
     .hero-inner {
       min-height: calc(100vh - 94px);
-      padding: 116px 0 120px;
+      display: grid;
+      align-content: center;
+      padding: 48px 0;
     }
 
     .eyebrow {
@@ -251,6 +253,13 @@
       display: grid;
       grid-template-rows: auto auto auto;
       gap: 14px;
+    }
+
+    .problem-panel {
+      min-height: 212px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
 
     .flow-arrow {
@@ -413,7 +422,9 @@
       }
 
       .hero-inner {
-        padding: 72px 0 40px;
+        min-height: calc(100vh - 94px);
+        align-content: center;
+        padding: 36px 0;
       }
 
       .nav-links {
