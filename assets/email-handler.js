@@ -1,147 +1,357 @@
-// Secure email functionality for Beyryl website using Formspree
-class EmailHandler {
+/**
+ * Handles Beyryl Vessel private briefing submissions.
+ *
+ * The Formspree endpoint is intentionally public because requests are submitted
+ * directly from the browser. Do not place API secrets or private credentials in
+ * this file.
+ */
+class PrivateBriefingFormHandler {
   constructor() {
-    // Formspree endpoint - safe to expose publicly
-    this.formspreeEndpoint = 'https://formspree.io/f/mwpqayaw'; // Replace with your Formspree form ID
-    this.init();
+    // Existing Beyryl Formspree form endpoint.
+    this.formspreeEndpoint = "https://formspree.io/f/mwpqayaw";
+
+    // Personal email providers are rejected because this is a business inquiry.
+    this.publicEmailDomains = new Set([
+      "gmail.com",
+      "googlemail.com",
+      "yahoo.com",
+      "yahoo.co.uk",
+      "yahoo.ca",
+      "yahoo.in",
+      "hotmail.com",
+      "outlook.com",
+      "live.com",
+      "msn.com",
+      "aol.com",
+      "icloud.com",
+      "me.com",
+      "mac.com",
+      "protonmail.com",
+      "proton.me",
+      "tutanota.com",
+      "tuta.com",
+      "zoho.com",
+      "mail.com",
+    ]);
+
+    this.form = document.getElementById("briefingForm");
+
+    if (!this.form) {
+      console.warn(
+        "Private briefing form was not found. Expected #briefingForm.",
+      );
+      return;
+    }
+
+    this.submitButton = this.form.querySelector('button[type="submit"]');
+    this.originalButtonText =
+      this.submitButton?.textContent?.trim() || "Request briefing";
+
+    this.form.addEventListener("submit", (event) => {
+      this.handleSubmit(event);
+    });
   }
 
-  init() {
-    console.log('Email handler initialized with Formspree');
+  /**
+   * Reads and normalizes the values from the private briefing form.
+   */
+  getFormValues() {
+    return {
+      name: this.getInputValue("name"),
+      email: this.getInputValue("work-email").toLowerCase(),
+      company: this.getInputValue("company-name"),
+      role: this.getInputValue("role"),
+      brief: this.getInputValue("brief"),
+    };
   }
 
-  async sendEmail(email, formType = 'general') {
-    try {
-      const response = await fetch(this.formspreeEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email,
-          formType: formType,
-          message: `New access request from ${formType} form`,
-          timestamp: new Date().toISOString(),
-          _replyto: email,
-          _subject: `Beyryl Access Request from ${formType} form`,
-        }),
-      });
+  /**
+   * Returns a trimmed value from an input or textarea.
+   */
+  getInputValue(elementId) {
+    const element = document.getElementById(elementId);
 
-      if (response.ok) {
-        return { success: true, response };
-      } else {
-        throw new Error('Failed to submit form');
+    if (!element) {
+      return "";
+    }
+
+    return element.value.trim();
+  }
+
+  /**
+   * Performs client-side validation before sending anything to Formspree.
+   */
+  validate(values) {
+    if (!values.name) {
+      return {
+        valid: false,
+        fieldId: "name",
+        message: "Please enter your name.",
+      };
+    }
+
+    if (!values.email) {
+      return {
+        valid: false,
+        fieldId: "work-email",
+        message: "Please enter your work email address.",
+      };
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(values.email)) {
+      return {
+        valid: false,
+        fieldId: "work-email",
+        message: "Please enter a valid work email address.",
+      };
+    }
+
+    const emailDomain = values.email.split("@")[1];
+
+    if (this.publicEmailDomains.has(emailDomain)) {
+      return {
+        valid: false,
+        fieldId: "work-email",
+        message:
+          "Please use your company email address. Personal email addresses are not accepted.",
+      };
+    }
+
+    if (!values.company) {
+      return {
+        valid: false,
+        fieldId: "company-name",
+        message: "Please enter your company name.",
+      };
+    }
+
+    if (values.name.length > 100) {
+      return {
+        valid: false,
+        fieldId: "name",
+        message: "Please keep your name under 100 characters.",
+      };
+    }
+
+    if (values.email.length > 254) {
+      return {
+        valid: false,
+        fieldId: "work-email",
+        message: "Please keep your email address under 254 characters.",
+      };
+    }
+
+    if (values.company.length > 160) {
+      return {
+        valid: false,
+        fieldId: "company-name",
+        message: "Please keep the company name under 160 characters.",
+      };
+    }
+
+    if (values.role.length > 160) {
+      return {
+        valid: false,
+        fieldId: "role",
+        message: "Please keep the role under 160 characters.",
+      };
+    }
+
+    if (values.brief.length > 2000) {
+      return {
+        valid: false,
+        fieldId: "brief",
+        message: "Please keep the briefing description under 2,000 characters.",
+      };
+    }
+
+    return {
+      valid: true,
+      fieldId: null,
+      message: "",
+    };
+  }
+
+  /**
+   * Sends all private briefing fields to Formspree.
+   */
+  async submitToFormspree(values) {
+    const response = await fetch(this.formspreeEndpoint, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: values.name,
+        email: values.email,
+        company: values.company,
+        role: values.role || "Not provided",
+        briefing_request: values.brief || "No additional details provided",
+        form_type: "Beyryl Vessel private briefing",
+        source_page: window.location.href,
+        submitted_at: new Date().toISOString(),
+
+        // Formspree-supported metadata.
+        _replyto: values.email,
+        _subject: `Beyryl Vessel private briefing request — ${values.company}`,
+      }),
+    });
+
+    if (!response.ok) {
+      let errorMessage = "Formspree rejected the briefing request.";
+
+      try {
+        const responseBody = await response.json();
+
+        if (Array.isArray(responseBody.errors)) {
+          errorMessage = responseBody.errors
+            .map((error) => error.message)
+            .filter(Boolean)
+            .join(" ");
+        }
+      } catch {
+        // Formspree did not return JSON. Keep the default error message.
       }
+
+      throw new Error(errorMessage);
+    }
+
+    return response;
+  }
+
+  /**
+   * Processes a form submission.
+   */
+  async handleSubmit(event) {
+    event.preventDefault();
+
+    this.removeMessage();
+
+    const values = this.getFormValues();
+    const validation = this.validate(values);
+
+    if (!validation.valid) {
+      this.showMessage("error", validation.message);
+
+      const invalidField = document.getElementById(validation.fieldId);
+
+      if (invalidField) {
+        invalidField.focus();
+      }
+
+      return;
+    }
+
+    this.setSubmitting(true);
+
+    try {
+      await this.submitToFormspree(values);
+
+      this.form.reset();
+
+      this.showMessage(
+        "success",
+        "Thank you. Your private briefing request has been received. The Beyryl team will contact you shortly.",
+      );
     } catch (error) {
-      console.error('Failed to send email:', error);
-      return { success: false, error };
+      console.error("Private briefing submission failed:", error);
+
+      this.showMessage(
+        "error",
+        "We could not submit your request. Please try again or contact mo@beyryl.com.",
+      );
+    } finally {
+      this.setSubmitting(false);
     }
   }
 
-  // Show success/error messages to user
-  showMessage(form, success, message) {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `mt-4 p-3 rounded-md text-sm ${
-      success 
-        ? 'bg-green-900/20 border border-green-500/30 text-green-400' 
-        : 'bg-red-900/20 border border-red-500/30 text-red-400'
-    }`;
-    messageDiv.textContent = message;
+  /**
+   * Enables or disables the form while the request is in progress.
+   */
+  setSubmitting(isSubmitting) {
+    if (!this.submitButton) {
+      return;
+    }
 
-    // Remove any existing message
-    const existingMessage = form.querySelector('.email-message');
+    this.submitButton.disabled = isSubmitting;
+    this.submitButton.textContent = isSubmitting
+      ? "Submitting..."
+      : this.originalButtonText;
+
+    this.submitButton.setAttribute(
+      "aria-busy",
+      isSubmitting ? "true" : "false",
+    );
+
+    this.submitButton.style.opacity = isSubmitting ? "0.72" : "";
+    this.submitButton.style.cursor = isSubmitting ? "wait" : "";
+  }
+
+  /**
+   * Displays a message inside the modal beneath the submit button.
+   */
+  showMessage(type, message) {
+    this.removeMessage();
+
+    const messageElement = document.createElement("div");
+    const isSuccess = type === "success";
+
+    messageElement.className = "briefing-form-message";
+    messageElement.setAttribute("role", isSuccess ? "status" : "alert");
+    messageElement.setAttribute("aria-live", isSuccess ? "polite" : "assertive");
+    messageElement.textContent = message;
+
+    Object.assign(messageElement.style, {
+      marginTop: "14px",
+      border: `1px solid ${
+        isSuccess
+          ? "rgba(80, 200, 120, 0.34)"
+          : "rgba(248, 113, 113, 0.38)"
+      }`,
+      borderRadius: "14px",
+      padding: "12px 14px",
+      color: isSuccess ? "#9be8b3" : "#fca5a5",
+      background: isSuccess
+        ? "rgba(80, 200, 120, 0.08)"
+        : "rgba(248, 113, 113, 0.08)",
+      fontSize: "0.86rem",
+      lineHeight: "1.5",
+    });
+
+    this.form.appendChild(messageElement);
+  }
+
+  /**
+   * Removes the previous success or error message.
+   */
+  removeMessage() {
+    const existingMessage = this.form.querySelector(
+      ".briefing-form-message",
+    );
+
     if (existingMessage) {
       existingMessage.remove();
-    }
-
-    messageDiv.classList.add('email-message');
-    form.appendChild(messageDiv);
-
-    // Auto-remove message after 5 seconds
-    setTimeout(() => {
-      if (messageDiv.parentNode) {
-        messageDiv.remove();
-      }
-    }, 5000);
-  }
-
-  // Handle form submission
-  async handleFormSubmit(event, formType) {
-    event.preventDefault();
-    
-    const form = event.target;
-    const emailInput = form.querySelector('input[type="email"]');
-    const submitButton = form.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton.textContent;
-
-    if (!emailInput || !emailInput.value) {
-      this.showMessage(form, false, 'Please enter a valid email address.');
-      return;
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(emailInput.value)) {
-      this.showMessage(form, false, 'Please enter a valid email address.');
-      return;
-    }
-
-    // Check for business email (exclude public domains)
-    const email = emailInput.value.toLowerCase();
-    const publicDomains = [
-      'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com',
-      'icloud.com', 'me.com', 'mac.com', 'live.com', 'msn.com',
-      'yahoo.co.uk', 'yahoo.ca', 'yahoo.in', 'googlemail.com',
-      'protonmail.com', 'tutanota.com', 'zoho.com', 'mail.com'
-    ];
-
-    const domain = email.split('@')[1];
-    if (publicDomains.includes(domain)) {
-      this.showMessage(form, false, 'Please use your work email address. Personal email addresses are not accepted.');
-      return;
-    }
-
-    // Update button to show loading state
-    submitButton.textContent = 'Sending...';
-    submitButton.disabled = true;
-
-    try {
-      const result = await this.sendEmail(emailInput.value, formType);
-      
-      if (result.success) {
-        this.showMessage(form, true, 'Thank you! Your access request has been sent. We\'ll be in touch soon!');
-        emailInput.value = ''; // Clear the form
-      } else {
-        this.showMessage(form, false, 'Sorry, there was an error sending your request. Please try again or contact mo@beyryl.com directly.');
-      }
-    } catch (error) {
-      this.showMessage(form, false, 'Sorry, there was an error sending your request. Please try again or contact mo@beyryl.com directly.');
-    } finally {
-      // Reset button state
-      submitButton.textContent = originalButtonText;
-      submitButton.disabled = false;
     }
   }
 }
 
-// Initialize email handler when page loads
-let emailHandler;
+/**
+ * The updated homepage contains the form in the initial HTML, so there is no
+ * need for the old one-second timeout used by the component-based website.
+ */
+function initializePrivateBriefingForm() {
+  new PrivateBriefingFormHandler();
+}
 
-document.addEventListener('DOMContentLoaded', function() {
-  emailHandler = new EmailHandler();
-  
-  // Wait for components to load, then attach form handlers
-  setTimeout(() => {
-    // Find and attach handlers to all forms
-    const heroForm = document.querySelector('#hero form');
-    const ctaForm = document.querySelector('#partners form');
-    
-    if (heroForm) {
-      heroForm.addEventListener('submit', (e) => emailHandler.handleFormSubmit(e, 'hero'));
-    }
-    
-    if (ctaForm) {
-      ctaForm.addEventListener('submit', (e) => emailHandler.handleFormSubmit(e, 'cta'));
-    }
-  }, 1000); // Wait 1 second for components to load
-});
+if (document.readyState === "loading") {
+  document.addEventListener(
+    "DOMContentLoaded",
+    initializePrivateBriefingForm,
+    { once: true },
+  );
+} else {
+  initializePrivateBriefingForm();
+}
