@@ -1,27 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Beyryl</title>
-  <meta name="theme-color" content="#f3f5f9" />
-  <meta name="color-scheme" content="light" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <link rel="icon" type="image/svg+xml" href="assets/beyryl-logo_hex.svg" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Beyryl Vessel — private AI infrastructure governed by Beyryl Technarchy."
+  />
+  <title>Beyryl Vessel — Private AI Infrastructure</title>
+
   <style>
     :root {
-      --bg: #f3f5f9;
-      --surface: #ffffff;
-      --ink: #1f2b43;
-      --muted: #4e5f7d;
-      --line: #d8e0ee;
-      --cyan: #2cc8d6;
-      --sky: #5ba8ea;
-      --violet: #6675e8;
-      --brand-gradient: linear-gradient(120deg, var(--cyan), var(--sky), var(--violet));
+      --beryl: #50c878;
+      --emerald: #014421;
+      --graphite: #121212;
+      --graphite-2: #181b1a;
+      --graphite-3: #202422;
+      --mist: #f7f9f7;
+      --muted: #a7b0aa;
+      --line: rgba(255, 255, 255, 0.11);
+      --line-strong: rgba(80, 200, 120, 0.32);
+      --violet: #7a3ff0;
+      --cyan: #00c2ff;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --max-width: 1180px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     html {
       scroll-behavior: smooth;
@@ -29,455 +39,1860 @@
 
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: "Sohne", "Avenir Next", "Segoe UI", sans-serif;
-    }
-
-    .hero-shell {
-      min-height: calc(100vh - 94px);
-      position: relative;
-      overflow: hidden;
+      color: var(--mist);
       background:
-        radial-gradient(55rem 32rem at 90% 16%, rgba(102,117,232,.16), transparent 60%),
-        radial-gradient(40rem 26rem at 12% 68%, rgba(44,200,214,.16), transparent 65%),
-        var(--bg);
+        radial-gradient(circle at 18% 10%, rgba(80, 200, 120, 0.10), transparent 26%),
+        radial-gradient(circle at 84% 18%, rgba(0, 194, 255, 0.08), transparent 22%),
+        var(--graphite);
+      font-family:
+        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    .top-nav-inner,
-    .hero-inner,
-    .section-inner,
-    .footer-inner {
-      width: min(1180px, 92vw);
-      margin: 0 auto;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.32;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
+      z-index: -1;
     }
 
-    .top-nav {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(8px);
-      background: rgba(255,255,255,.8);
-    }
-
-    .top-nav-inner {
-      height: 94px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-weight: 700;
-      letter-spacing: .01em;
-      color: var(--ink);
+    a {
+      color: inherit;
       text-decoration: none;
     }
 
-    .brand span {
-      font-size: 39px;
-      line-height: 1;
+    button,
+    input,
+    textarea {
+      font: inherit;
     }
 
-    .brand img {
-      width: 34px;
-      height: 34px;
+    .container {
+      width: min(calc(100% - 40px), var(--max-width));
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--beryl);
+      font-size: 0.76rem;
+      font-weight: 750;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--beryl), var(--cyan), var(--violet));
+      box-shadow: 0 0 16px rgba(0, 194, 255, 0.35);
+    }
+
+    .section-title {
+      max-width: 760px;
+      margin: 18px 0 18px;
+      font-size: clamp(2rem, 4.6vw, 4.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+    }
+
+    .section-copy {
+      max-width: 720px;
+      margin: 0;
+      color: #c2c9c4;
+      font-size: clamp(1rem, 1.4vw, 1.16rem);
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 50;
+      border-bottom: 1px solid transparent;
+      transition: background 180ms ease, border-color 180ms ease, backdrop-filter 180ms ease;
+    }
+
+    .site-header.scrolled {
+      border-color: var(--line);
+      background: rgba(18, 18, 18, 0.78);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      display: flex;
+      min-height: 76px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.05rem;
+      font-weight: 760;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 12px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+      box-shadow: inset 0 0 20px rgba(80, 200, 120, 0.03);
+    }
+
+    .brand-name strong {
+      color: var(--beryl);
+      font-weight: 800;
+    }
+
+    .brand-sub {
+      color: #7f8b84;
+      font-size: 0.62rem;
+      font-weight: 650;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
     }
 
     .nav-links {
       display: flex;
-      gap: 26px;
-      color: var(--muted);
-      font-weight: 600;
-      font-size: 16px;
+      align-items: center;
+      gap: 30px;
+      color: #cad0cc;
+      font-size: 0.92rem;
     }
 
     .nav-links a {
-      color: inherit;
-      text-decoration: none;
+      transition: color 140ms ease;
     }
 
     .nav-links a:hover {
-      color: #324564;
+      color: white;
     }
 
-    .hero-inner {
-      min-height: calc(100vh - 94px);
+    .nav-cta,
+    .button-primary,
+    .button-secondary {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 0 20px;
+      font-weight: 720;
+      transition:
+        transform 150ms ease,
+        border-color 150ms ease,
+        background 150ms ease,
+        box-shadow 150ms ease;
+    }
+
+    .nav-cta,
+    .button-primary {
+      color: #06150b;
+      background: var(--beryl);
+      box-shadow: 0 12px 36px rgba(80, 200, 120, 0.18);
+    }
+
+    .nav-cta:hover,
+    .button-primary:hover {
+      transform: translateY(-2px);
+      background: #69d58a;
+      box-shadow: 0 16px 42px rgba(80, 200, 120, 0.26);
+    }
+
+    .button-secondary {
+      color: #e6ebe7;
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .button-secondary:hover {
+      transform: translateY(-2px);
+      border-color: rgba(80, 200, 120, 0.46);
+      background: rgba(80, 200, 120, 0.07);
+    }
+
+    .mobile-menu-button {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: white;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
       display: grid;
-      align-content: center;
-      padding: 48px 0;
+      align-items: center;
+      padding: 128px 0 74px;
     }
 
-    .eyebrow {
-      margin: 0 0 28px;
-      font-size: 13px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: #657799;
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(430px, 0.96fr);
+      align-items: center;
+      gap: 44px;
+    }
+
+    .hero-copy h1 {
+      max-width: 760px;
+      margin: 22px 0 24px;
+      font-size: clamp(3.4rem, 7.6vw, 7rem);
+      line-height: 0.92;
+      letter-spacing: -0.065em;
+    }
+
+    .hero-copy h1 .accent {
+      display: block;
+      color: transparent;
+      background: linear-gradient(90deg, #f5fff7 0%, var(--beryl) 42%, var(--cyan) 76%, #d7c8ff 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .hero-copy p {
+      max-width: 650px;
+      margin: 0;
+      color: #b9c2bc;
+      font-size: clamp(1.06rem, 1.8vw, 1.28rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 26px;
+      color: #7f8b84;
+      font-size: 0.83rem;
+    }
+
+    .hero-note span:first-child {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--beryl);
+      box-shadow: 0 0 18px rgba(80, 200, 120, 0.85);
+    }
+
+    .hero-art {
+      position: relative;
+      min-height: 620px;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .hero-art::before {
+      content: "";
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(80, 200, 120, 0.12), transparent 48%),
+        radial-gradient(circle at 68% 34%, rgba(0, 194, 255, 0.10), transparent 24%);
+      filter: blur(14px);
+      z-index: -2;
+    }
+
+    .instrument-panel {
+      position: relative;
+      width: min(100%, 550px);
+      aspect-ratio: 0.88;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.015)),
+        rgba(9, 16, 12, 0.54);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .instrument-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent 49.8%, rgba(80,200,120,0.08) 50%, transparent 50.2%),
+        linear-gradient(transparent 49.8%, rgba(80,200,120,0.06) 50%, transparent 50.2%);
+      background-size: 82px 82px;
+      opacity: 0.46;
+    }
+
+    .instrument-top {
+      position: absolute;
+      inset: 20px 22px auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #79857e;
+      font-size: 0.68rem;
       font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
     }
 
-    .hero-grid {
+    .signal {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .signal-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--beryl);
+      box-shadow: 0 0 14px rgba(80,200,120,0.82);
+    }
+
+    .vessel-svg {
+      position: absolute;
+      inset: 52px 18px 58px;
+      width: calc(100% - 36px);
+      height: calc(100% - 110px);
+      overflow: visible;
+      animation: vessel-drift 8s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .vessel-shell {
+      fill: rgba(3, 36, 17, 0.42);
+      stroke: rgba(80, 200, 120, 0.86);
+      stroke-width: 1.6;
+      filter: drop-shadow(0 0 14px rgba(80, 200, 120, 0.14));
+    }
+
+    .vessel-inner {
+      fill: rgba(255,255,255,0.025);
+      stroke: rgba(255,255,255,0.16);
+      stroke-width: 1;
+    }
+
+    .vessel-channel {
+      stroke: rgba(0,194,255,0.42);
+      stroke-width: 1;
+      stroke-dasharray: 5 8;
+      animation: dash-flow 7s linear infinite;
+    }
+
+    .route-line {
+      fill: none;
+      stroke: url(#routeGradient);
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-dasharray: 3 10;
+      animation: dash-flow 5s linear infinite;
+    }
+
+    .beacon-ring {
+      fill: none;
+      stroke: rgba(80,200,120,0.34);
+      stroke-width: 1;
+      animation: beacon-pulse 3.6s ease-out infinite;
+      transform-origin: 300px 265px;
+    }
+
+    .chamber-label {
+      fill: #dbe4dd;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.35px;
+      text-anchor: middle;
+    }
+
+    .chamber-sub {
+      fill: #7f8b84;
+      font-size: 7.6px;
+      letter-spacing: 1.05px;
+      text-anchor: middle;
+    }
+
+    .instrument-footer {
+      position: absolute;
+      inset: auto 22px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #6f7b74;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .scroll-marker {
+      position: absolute;
+      left: 50%;
+      bottom: 20px;
       display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 86px;
+      place-items: center;
+      transform: translateX(-50%);
+      color: #6f7b74;
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .scroll-marker::after {
+      content: "";
+      width: 1px;
+      height: 38px;
+      margin-top: 12px;
+      background: linear-gradient(var(--beryl), transparent);
+      animation: scroll-line 2s ease-in-out infinite;
+    }
+
+    section {
+      position: relative;
+      padding: 120px 0;
+    }
+
+    .surface-section {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.022), rgba(255,255,255,0.008));
+    }
+
+    .contrast-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .contrast-copy {
+      position: sticky;
+      top: 120px;
+    }
+
+    .comparison {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.025);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .comparison-row:last-child {
+      border-bottom: 0;
+    }
+
+    .comparison-cell {
+      min-height: 104px;
+      padding: 24px;
+    }
+
+    .comparison-cell + .comparison-cell {
+      border-left: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(80,200,120,0.055), rgba(0,194,255,0.02));
+    }
+
+    .comparison-label {
+      margin-bottom: 8px;
+      color: #718078;
+      font-size: 0.7rem;
+      font-weight: 740;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .comparison-text {
+      margin: 0;
+      color: #d2d9d4;
+      font-size: 0.96rem;
+    }
+
+    .capability-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 54px;
+    }
+
+    .capability-card {
+      position: relative;
+      min-height: 300px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      background: rgba(255,255,255,0.025);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .capability-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(80,200,120,0.34);
+      background: rgba(80,200,120,0.035);
+    }
+
+    .capability-card::before {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      right: -80px;
+      top: -80px;
+      border: 1px solid rgba(80,200,120,0.12);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 28px rgba(80,200,120,0.025),
+        0 0 0 58px rgba(0,194,255,0.018);
+    }
+
+    .capability-number {
+      color: #66736c;
+      font-size: 0.7rem;
+      font-weight: 720;
+      letter-spacing: 0.16em;
+    }
+
+    .capability-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      margin: 54px 0 24px;
+      border: 1px solid rgba(80,200,120,0.24);
+      border-radius: 16px;
+      color: var(--beryl);
+      background: rgba(80,200,120,0.055);
+    }
+
+    .capability-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .capability-card p {
+      margin: 0;
+      color: #98a49d;
+      font-size: 0.93rem;
+    }
+
+    .technarchy-layout {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 62px;
       align-items: center;
     }
 
-    h1 {
-      margin: 0;
-      font-size: clamp(40px, 7vw, 84px);
-      line-height: .95;
-      letter-spacing: -.03em;
-      font-weight: 700;
-      color: #21304b;
-      max-width: 11ch;
-    }
-
-    .gradient-word {
-      background: var(--brand-gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .nowrap {
-      white-space: nowrap;
-    }
-
-    .lead {
-      margin: 0;
-      font-size: clamp(19px, 2.1vw, 29px);
-      line-height: 1.24;
-      letter-spacing: -.02em;
-      color: #324564;
-      max-width: 25ch;
-    }
-
-    .section {
-      padding: 92px 0;
-    }
-
-    .section-kicker {
-      margin: 0 0 18px;
-      font-size: 13px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: #657799;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .section-title {
-      margin: 0;
-      text-align: center;
-      font-size: clamp(34px, 5vw, 64px);
-      line-height: 1.03;
-      letter-spacing: -.03em;
-      color: #21304b;
-    }
-
-    .section-copy {
-      margin: 20px auto 0;
-      text-align: center;
-      font-size: clamp(19px, 2.1vw, 32px);
-      line-height: 1.28;
-      letter-spacing: -.02em;
-      color: #425677;
-      max-width: 34ch;
-    }
-
-    .two-grid {
-      margin-top: 52px;
+    .principles {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
+      gap: 12px;
+      margin-top: 34px;
     }
 
-    .three-grid {
-      margin-top: 44px;
+    .principle {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: 44px 1fr;
       gap: 16px;
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding: 20px 0;
     }
 
-    .card {
-      border: 1px solid #d1ddee;
-      border-radius: 16px;
-      background: rgba(255,255,255,.78);
-      padding: 28px;
-      box-shadow: 0 10px 22px rgba(77,102,145,.08);
+    .principle:last-child {
+      border-bottom: 1px solid var(--line);
     }
 
-    .card-kicker {
-      margin: 0 0 12px;
-      font-size: 13px;
-      letter-spacing: .18em;
+    .principle-index {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid rgba(80,200,120,0.24);
+      border-radius: 10px;
+      color: var(--beryl);
+      font-size: 0.76rem;
+      font-weight: 760;
+    }
+
+    .principle h3 {
+      margin: 0 0 4px;
+      font-size: 1.08rem;
+    }
+
+    .principle p {
+      margin: 0;
+      color: #8e9a93;
+      font-size: 0.92rem;
+    }
+
+    .governance-visual {
+      position: relative;
+      min-height: 560px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 50% 42%, rgba(80,200,120,0.10), transparent 25%),
+        linear-gradient(155deg, rgba(255,255,255,0.055), rgba(255,255,255,0.008));
+    }
+
+    .governance-visual .ring {
+      position: absolute;
+      left: 50%;
+      top: 47%;
+      border: 1px solid rgba(80,200,120,0.18);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .governance-visual .ring-1 {
+      width: 150px;
+      height: 150px;
+    }
+
+    .governance-visual .ring-2 {
+      width: 260px;
+      height: 260px;
+      border-style: dashed;
+      animation: spin 28s linear infinite;
+    }
+
+    .governance-visual .ring-3 {
+      width: 390px;
+      height: 390px;
+      border-color: rgba(0,194,255,0.10);
+      animation: spin-reverse 40s linear infinite;
+    }
+
+    .governance-core {
+      position: absolute;
+      left: 50%;
+      top: 47%;
+      width: 118px;
+      height: 118px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(80,200,120,0.58);
+      border-radius: 28px;
+      transform: translate(-50%, -50%) rotate(45deg);
+      background: rgba(5, 39, 18, 0.72);
+      box-shadow: 0 0 50px rgba(80,200,120,0.12);
+    }
+
+    .governance-core span {
+      transform: rotate(-45deg);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 760;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #61769a;
+    }
+
+    .orbit-label {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #aab4ae;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .orbit-label::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--beryl);
+      box-shadow: 0 0 12px rgba(80,200,120,0.6);
+    }
+
+    .orbit-label.one { left: 15%; top: 20%; }
+    .orbit-label.two { right: 10%; top: 31%; }
+    .orbit-label.three { left: 13%; bottom: 25%; }
+    .orbit-label.four { right: 13%; bottom: 16%; }
+
+    .governance-caption {
+      position: absolute;
+      inset: auto 24px 24px;
+      color: #6f7b74;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 52px;
+    }
+
+    .audience-card {
+      position: relative;
+      min-height: 380px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 34px;
+      background: rgba(255,255,255,0.025);
+    }
+
+    .audience-card:nth-child(2) {
+      background:
+        radial-gradient(circle at 82% 12%, rgba(0,194,255,0.09), transparent 26%),
+        rgba(255,255,255,0.025);
+    }
+
+    .audience-card .large-index {
+      position: absolute;
+      right: 24px;
+      top: 12px;
+      color: rgba(255,255,255,0.025);
+      font-size: 9rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .audience-card h3 {
+      max-width: 420px;
+      margin: 90px 0 16px;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .audience-card p {
+      max-width: 480px;
+      margin: 0;
+      color: #9ca8a0;
+    }
+
+    .audience-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0 12px;
+      color: #93a097;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .architecture {
+      display: grid;
+      gap: 14px;
+      margin-top: 54px;
+    }
+
+    .architecture-node {
+      position: relative;
+      display: grid;
+      grid-template-columns: 210px 1fr auto;
+      align-items: center;
+      gap: 24px;
+      min-height: 104px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 20px 24px;
+      background: rgba(255,255,255,0.022);
+    }
+
+    .architecture-node::after {
+      content: "";
+      position: absolute;
+      left: 104px;
+      top: 100%;
+      width: 1px;
+      height: 15px;
+      background: linear-gradient(var(--beryl), transparent);
+    }
+
+    .architecture-node:last-child::after {
+      display: none;
+    }
+
+    .architecture-label {
+      color: #7f8b84;
+      font-size: 0.7rem;
+      font-weight: 720;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .architecture-value {
+      font-size: 1.1rem;
       font-weight: 700;
     }
 
-    .card h3 {
-      margin: 0 0 14px;
-      font-size: clamp(30px, 3.1vw, 48px);
-      line-height: 1.02;
-      letter-spacing: -.02em;
-      color: #21304b;
+    .architecture-state {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #8f9b94;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    .card p {
-      margin: 0;
-      color: #425677;
-      font-size: 18px;
-      line-height: 1.5;
+    .architecture-state::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--beryl);
+      box-shadow: 0 0 12px rgba(80,200,120,0.62);
     }
 
-    .mini-card h4 {
-      margin: 0 0 10px;
-      color: #21304b;
-      font-size: 35px;
-      line-height: 1.04;
-      letter-spacing: -.02em;
+    .final-cta {
+      padding: 84px 0 40px;
     }
 
-    .mini-card p {
-      font-size: 18px;
+    .cta-panel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(80,200,120,0.22);
+      border-radius: 38px;
+      padding: 78px 48px;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(80,200,120,0.13), transparent 35%),
+        radial-gradient(circle at 95% 90%, rgba(0,194,255,0.08), transparent 30%),
+        rgba(255,255,255,0.025);
+      text-align: center;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.28);
     }
 
-    .flow {
+    .cta-panel::before,
+    .cta-panel::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(80,200,120,0.12);
+      border-radius: 50%;
+    }
+
+    .cta-panel::before {
+      width: 280px;
+      height: 280px;
+      left: -150px;
+      top: -160px;
+    }
+
+    .cta-panel::after {
+      width: 390px;
+      height: 390px;
+      right: -240px;
+      bottom: -260px;
+    }
+
+    .cta-panel h2 {
+      max-width: 850px;
+      margin: 18px auto;
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+    }
+
+    .cta-panel p {
+      max-width: 650px;
+      margin: 0 auto;
+      color: #aeb8b2;
+      font-size: 1.05rem;
+    }
+
+    .cta-panel .hero-actions {
+      justify-content: center;
+    }
+
+    .site-footer {
+      padding: 40px 0 34px;
+      color: #77837c;
+    }
+
+    .footer-layout {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      border-top: 1px solid var(--line);
+      padding-top: 32px;
+    }
+
+    .footer-lockup {
       display: grid;
-      grid-template-rows: auto auto auto;
+      gap: 8px;
+    }
+
+    .footer-lockup strong {
+      color: #d9e1dc;
+      font-size: 1.02rem;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-lockup span {
+      font-size: 0.78rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 18px;
+      font-size: 0.78rem;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(5, 8, 6, 0.72);
+      backdrop-filter: blur(14px);
+    }
+
+    .modal.open {
+      display: grid;
+    }
+
+    .modal-card {
+      position: relative;
+      width: min(100%, 620px);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 34px;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(80,200,120,0.10), transparent 30%),
+        #171a18;
+      box-shadow: var(--shadow);
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: white;
+      background: rgba(255,255,255,0.03);
+      cursor: pointer;
+    }
+
+    .modal-card h2 {
+      margin: 14px 0 10px;
+      font-size: 2.2rem;
+      letter-spacing: -0.04em;
+    }
+
+    .modal-card p {
+      margin: 0 0 24px;
+      color: #a8b2ac;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 14px;
     }
 
-    .problem-panel {
-      min-height: 212px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
+    .field {
+      display: grid;
+      gap: 8px;
     }
 
-    .flow-arrow {
-      text-align: center;
-      color: #5ba8ea;
-      font-size: 34px;
-      line-height: 1;
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      color: #8f9b94;
+      font-size: 0.75rem;
       font-weight: 700;
-    }
-
-    .solution-card {
-      background: linear-gradient(165deg, rgba(233,245,255,.9), rgba(245,247,255,.92));
-      border-color: #bdd4f8;
-    }
-
-    .partner-wrap {
-      margin-top: 46px;
-      border: 1px solid #c8dbfa;
-      border-radius: 20px;
-      padding: 36px;
-      background: linear-gradient(165deg, rgba(234,243,255,.75), rgba(248,250,255,.85));
-      position: relative;
-      overflow: hidden;
-    }
-
-    .partner-wrap::before,
-    .partner-wrap::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      filter: blur(40px);
-      pointer-events: none;
-    }
-
-    .partner-wrap::before {
-      width: 220px;
-      height: 220px;
-      left: -50px;
-      top: -50px;
-      background: rgba(44,200,214,.20);
-    }
-
-    .partner-wrap::after {
-      width: 240px;
-      height: 240px;
-      right: -70px;
-      bottom: -80px;
-      background: rgba(102,117,232,.22);
-    }
-
-    .partner-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 999px;
-      border: 1px solid #c7dbff;
-      background: linear-gradient(120deg, #dff4f7, #e6eeff);
-      color: #4a6387;
-      font-size: 12px;
-      letter-spacing: .06em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-weight: 700;
-      padding: 10px 14px;
-      margin-bottom: 20px;
     }
 
-    .form-row {
-      margin-top: 26px;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
+    .field input,
+    .field textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 13px 14px;
+      color: white;
+      outline: none;
+      background: rgba(255,255,255,0.03);
     }
 
-    .email {
-      width: min(360px, 100%);
-      height: 52px;
-      border-radius: 12px;
-      border: 1px solid #c7d6ef;
-      background: #fff;
-      color: #324564;
-      padding: 0 16px;
-      font: inherit;
+    .field textarea {
+      min-height: 118px;
+      resize: vertical;
     }
 
-    .btn {
-      height: 52px;
-      border: 0;
-      border-radius: 12px;
-      padding: 0 24px;
-      color: #fff;
-      background: var(--brand-gradient);
-      font: inherit;
-      font-weight: 700;
+    .field input:focus,
+    .field textarea:focus {
+      border-color: rgba(80,200,120,0.58);
+      box-shadow: 0 0 0 3px rgba(80,200,120,0.08);
+    }
+
+    .form-submit {
+      width: 100%;
+      margin-top: 16px;
       cursor: pointer;
-      box-shadow: 0 10px 24px rgba(102,117,232,.24);
     }
 
-    footer {
-      border-top: 1px solid var(--line);
-      background: #eef2f8;
-      padding: 28px 0;
-      margin-top: 84px;
+    .form-note {
+      margin-top: 12px !important;
+      color: #68736c !important;
+      font-size: 0.74rem;
     }
 
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      color: #4f6282;
-      font-size: 15px;
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 600ms ease, transform 600ms ease;
     }
 
-    .footer-inner a {
-      color: inherit;
-      text-decoration: none;
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .partner-ticker {
-      margin-left: auto;
-      width: min(300px, 100%);
-      border: 1px solid #d1ddee;
-      background: #fff;
-      color: #3f5375;
-      border-radius: 10px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
+    @keyframes vessel-drift {
+      0%, 100% { transform: translateY(0) rotate(-0.8deg); }
+      50% { transform: translateY(-12px) rotate(0.8deg); }
     }
 
-    @media (max-width: 980px) {
-      .hero-grid {
+    @keyframes dash-flow {
+      to { stroke-dashoffset: -52; }
+    }
+
+    @keyframes beacon-pulse {
+      0% { opacity: 0.5; transform: scale(0.72); }
+      70%, 100% { opacity: 0; transform: scale(1.45); }
+    }
+
+    @keyframes scroll-line {
+      0%, 100% { opacity: 0.25; transform: scaleY(0.6); transform-origin: top; }
+      50% { opacity: 0.8; transform: scaleY(1); transform-origin: top; }
+    }
+
+    @keyframes spin {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes spin-reverse {
+      to { transform: translate(-50%, -50%) rotate(-360deg); }
+    }
+
+    @media (max-width: 1020px) {
+      .hero-layout,
+      .contrast-grid,
+      .technarchy-layout {
         grid-template-columns: 1fr;
-        gap: 24px;
       }
 
-      .section {
-        padding: 66px 0;
+      .hero {
+        min-height: auto;
       }
 
-      .two-grid,
-      .three-grid {
-        grid-template-columns: 1fr;
-        margin-top: 30px;
+      .hero-copy {
+        padding-top: 50px;
       }
 
-      .card {
-        padding: 22px;
+      .hero-art {
+        min-height: 540px;
       }
 
-      .lead,
-      h1 {
-        max-width: none;
+      .instrument-panel {
+        width: min(100%, 600px);
       }
 
-      .hero-inner {
-        min-height: calc(100vh - 94px);
-        align-content: center;
-        padding: 36px 0;
+      .contrast-copy {
+        position: static;
+      }
+
+      .capability-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(calc(100% - 28px), var(--max-width));
+      }
+
+      .nav {
+        min-height: 68px;
       }
 
       .nav-links {
+        position: fixed;
+        inset: 68px 14px auto;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 8px;
+        background: rgba(18,18,18,0.96);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 14px;
+        border-radius: 12px;
+      }
+
+      .nav-links a:hover {
+        background: rgba(255,255,255,0.04);
+      }
+
+      .nav-cta {
+        margin-top: 6px;
+      }
+
+      .mobile-menu-button {
+        display: inline-grid;
+        place-items: center;
+      }
+
+      .hero {
+        padding-top: 105px;
+      }
+
+      .hero-layout {
+        gap: 14px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(3.15rem, 16vw, 5rem);
+      }
+
+      .hero-art {
+        min-height: 455px;
+      }
+
+      .instrument-panel {
+        border-radius: 24px;
+      }
+
+      .scroll-marker {
         display: none;
       }
 
-      .footer-inner {
-        flex-wrap: wrap;
+      section {
+        padding: 88px 0;
       }
 
-      .partner-ticker {
-        margin-left: 0;
+      .capability-grid,
+      .audience-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .capability-card {
+        min-height: 250px;
+      }
+
+      .capability-icon {
+        margin-top: 34px;
+      }
+
+      .comparison-cell {
+        min-height: 118px;
+        padding: 18px;
+      }
+
+      .architecture-node {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .architecture-node::after {
+        left: 28px;
+      }
+
+      .architecture-state {
+        margin-top: 6px;
+      }
+
+      .governance-visual {
+        min-height: 450px;
+      }
+
+      .governance-visual .ring-3 {
+        width: 310px;
+        height: 310px;
+      }
+
+      .cta-panel {
+        padding: 58px 24px;
+        border-radius: 26px;
+      }
+
+      .footer-layout {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .footer-links {
+        justify-content: flex-start;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
       }
     }
   </style>
 </head>
-<body>
-  <header id="nav"></header>
 
-  <main>
-    <section id="hero"></section>
-    <section id="identity"></section>
-    <section id="delivery"></section>
-    <section id="partnership"></section>
+<body>
+  <header class="site-header" id="siteHeader">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Beyryl Vessel home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 1200 1200" fill="none">
+            <defs>
+              <linearGradient id="brandHexGradient" x1="240" y1="960" x2="960" y2="240" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="var(--beryl)" />
+                <stop offset="50%" stop-color="var(--cyan)" />
+                <stop offset="100%" stop-color="var(--violet)" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M600 240 L911.77 420 L911.77 780 L600 960 L288.23 780 L288.23 420 Z"
+              stroke="url(#brandHexGradient)"
+              stroke-width="44"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+        <span>
+          <span class="brand-name"><strong>B</strong>EYRỲL</span>
+          <span class="brand-sub">Vessel</span>
+        </span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+        <a href="#vessel">Vessel</a>
+        <a href="#technarchy">Technarchy</a>
+        <a href="#partners">Partners</a>
+        <a href="#company">Company</a>
+        <a class="nav-cta" href="#briefing" data-open-modal>Request a private briefing</a>
+      </nav>
+
+      <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Open navigation" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M3 5H17M3 10H17M3 15H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-layout">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">Beyryl Vessel</div>
+          <h1>
+            A private foundation
+            <span class="accent">for enterprise intelligence.</span>
+          </h1>
+          <p>
+            Beyryl brings AI infrastructure, business data, and governance into one
+            dedicated environment—giving organizations greater control over how
+            intelligence is deployed, operated, and trusted.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button-primary" href="#briefing" data-open-modal>
+              Request a private briefing
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="button-secondary" href="#technarchy">
+              Explore Beyryl Technarchy
+              <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+
+          <div class="hero-note">
+            <span aria-hidden="true"></span>
+            <span>Built for enterprises, MSPs, and AI delivery teams.</span>
+          </div>
+        </div>
+
+        <div class="hero-art reveal" aria-label="Abstract crystalline representation of a Beyryl Vessel">
+          <div class="instrument-panel">
+            <div class="instrument-top">
+              <span>Dedicated environment</span>
+              <span class="signal"><span class="signal-dot"></span> Governed</span>
+            </div>
+
+            <svg class="vessel-svg" viewBox="0 0 600 560" role="img" aria-label="Beyryl Vessel architecture concept">
+              <defs>
+                <linearGradient id="shellGradient" x1="150" y1="85" x2="450" y2="470">
+                  <stop offset="0%" stop-color="#50C878" stop-opacity="0.18"/>
+                  <stop offset="52%" stop-color="#014421" stop-opacity="0.38"/>
+                  <stop offset="100%" stop-color="#00C2FF" stop-opacity="0.11"/>
+                </linearGradient>
+                <linearGradient id="routeGradient" x1="145" y1="460" x2="482" y2="112">
+                  <stop offset="0%" stop-color="#50C878"/>
+                  <stop offset="54%" stop-color="#00C2FF"/>
+                  <stop offset="100%" stop-color="#7A3FF0"/>
+                </linearGradient>
+              </defs>
+
+              <path class="route-line" d="M84 440C144 404 153 341 196 322C241 301 257 276 300 265C357 251 378 204 420 183C460 163 474 119 522 92"/>
+              <circle cx="300" cy="265" r="84" class="beacon-ring"/>
+              <circle cx="300" cy="265" r="84" class="beacon-ring" style="animation-delay:1.2s"/>
+              <circle cx="300" cy="265" r="84" class="beacon-ring" style="animation-delay:2.4s"/>
+
+              <path
+                class="vessel-shell"
+                fill="url(#shellGradient)"
+                d="M300 46L455 136V315C455 392 405 455 300 506C195 455 145 392 145 315V136L300 46Z"
+              />
+
+              <path class="vessel-inner" d="M300 91L411 155V302C411 359 374 407 300 447C226 407 189 359 189 302V155L300 91Z"/>
+
+              <path class="vessel-channel" d="M300 92V446"/>
+              <path class="vessel-channel" d="M189 228H411"/>
+              <path class="vessel-channel" d="M206 350H394"/>
+
+              <path class="vessel-inner" d="M210 142H276V214H210Z"/>
+              <path class="vessel-inner" d="M324 142H390V214H324Z"/>
+              <path class="vessel-inner" d="M210 245H276V333H210Z"/>
+              <path class="vessel-inner" d="M324 245H390V333H324Z"/>
+
+              <text class="chamber-label" x="243" y="172">INTELLIGENCE</text>
+              <text class="chamber-sub" x="243" y="189">MODEL CAPABILITY</text>
+
+              <text class="chamber-label" x="357" y="172">KNOWLEDGE</text>
+              <text class="chamber-sub" x="357" y="189">BUSINESS CONTEXT</text>
+
+              <text class="chamber-label" x="243" y="281">GOVERNANCE</text>
+              <text class="chamber-sub" x="243" y="298">POLICY + EVIDENCE</text>
+
+              <text class="chamber-label" x="357" y="281">OPERATIONS</text>
+              <text class="chamber-sub" x="357" y="298">HEALTH + LIFECYCLE</text>
+
+              <circle cx="300" cy="383" r="18" fill="rgba(80,200,120,0.08)" stroke="rgba(80,200,120,0.55)"/>
+              <path d="M291 383L298 390L310 375" fill="none" stroke="#50C878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <div class="instrument-footer">
+              <span>Refined by Beyryl</span>
+              <span>Technarchy active</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-marker" aria-hidden="true">Discover</div>
+    </section>
+
+    <section class="surface-section" id="vessel">
+      <div class="container contrast-grid">
+        <div class="contrast-copy reveal">
+          <div class="eyebrow">A different foundation</div>
+          <h2 class="section-title">AI adoption should not require surrendering operational control.</h2>
+          <p class="section-copy">
+            Most AI experiences begin as access to a shared service. Beyryl Vessel
+            is designed for organizations that need a more deliberate foundation—
+            one aligned to their data boundaries, operating requirements, governance
+            policies, and long-term AI strategy.
+          </p>
+        </div>
+
+        <div class="comparison reveal" aria-label="Shared AI access compared with Beyryl Vessel">
+          <div class="comparison-row">
+            <div class="comparison-cell">
+              <div class="comparison-label">Shared AI access</div>
+              <p class="comparison-text">General-purpose experience</p>
+            </div>
+            <div class="comparison-cell">
+              <div class="comparison-label">Beyryl Vessel</div>
+              <p class="comparison-text">Organization-specific environment</p>
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comparison-cell">
+              <div class="comparison-label">Shared AI access</div>
+              <p class="comparison-text">Provider-defined boundaries</p>
+            </div>
+            <div class="comparison-cell">
+              <div class="comparison-label">Beyryl Vessel</div>
+              <p class="comparison-text">Business-aligned controls</p>
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comparison-cell">
+              <div class="comparison-label">Shared AI access</div>
+              <p class="comparison-text">Limited infrastructure visibility</p>
+            </div>
+            <div class="comparison-cell">
+              <div class="comparison-label">Beyryl Vessel</div>
+              <p class="comparison-text">Governed operational visibility</p>
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comparison-cell">
+              <div class="comparison-label">Shared AI access</div>
+              <p class="comparison-text">AI as an external tool</p>
+            </div>
+            <div class="comparison-cell">
+              <div class="comparison-label">Beyryl Vessel</div>
+              <p class="comparison-text">AI as organizational infrastructure</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="reveal">
+          <div class="eyebrow">One environment</div>
+          <h2 class="section-title">The foundations enterprise AI needs to operate.</h2>
+          <p class="section-copy">
+            Beyryl Vessel unifies the capabilities an organization needs without
+            publishing the implementation blueprint. The public promise is simple:
+            intelligence, knowledge, governance, and operations—designed as one system.
+          </p>
+        </div>
+
+        <div class="capability-grid">
+          <article class="capability-card reveal">
+            <div class="capability-number">01</div>
+            <div class="capability-icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <path d="M13 2L21 6.5V15.5L13 20L5 15.5V6.5L13 2Z" stroke="currentColor" stroke-width="1.3"/>
+                <path d="M9 10.5C9.8 8.6 11.1 7.6 13 7.6C15.7 7.6 17.4 9.5 17.4 12.2C17.4 14.8 15.5 16.7 13 16.7C10.4 16.7 8.6 14.8 8.6 12.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Intelligence</h3>
+            <p>Model capabilities selected around the organization’s requirements.</p>
+          </article>
+
+          <article class="capability-card reveal">
+            <div class="capability-number">02</div>
+            <div class="capability-icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <ellipse cx="13" cy="6" rx="8" ry="3.5" stroke="currentColor" stroke-width="1.3"/>
+                <path d="M5 6V13C5 14.9 8.6 16.5 13 16.5C17.4 16.5 21 14.9 21 13V6" stroke="currentColor" stroke-width="1.3"/>
+                <path d="M5 13V20C5 21.9 8.6 23.5 13 23.5C17.4 23.5 21 21.9 21 20V13" stroke="currentColor" stroke-width="1.3"/>
+              </svg>
+            </div>
+            <h3>Knowledge</h3>
+            <p>Business information prepared for secure, relevant AI use.</p>
+          </article>
+
+          <article class="capability-card reveal">
+            <div class="capability-number">03</div>
+            <div class="capability-icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <path d="M13 2.5L21 5.5V11.7C21 17.1 17.7 21.3 13 23.5C8.3 21.3 5 17.1 5 11.7V5.5L13 2.5Z" stroke="currentColor" stroke-width="1.3"/>
+                <path d="M9.2 12.7L11.8 15.2L16.9 9.6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Governance</h3>
+            <p>Policies, approvals, and evidence embedded into normal operation.</p>
+          </article>
+
+          <article class="capability-card reveal">
+            <div class="capability-number">04</div>
+            <div class="capability-icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <path d="M4 18L9 13L13 16L20.5 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M17 7H20.5V10.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                <path d="M4 22H22" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Operations</h3>
+            <p>Visibility into health, usage, performance, and lifecycle.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="surface-section" id="technarchy">
+      <div class="container technarchy-layout">
+        <div class="reveal">
+          <div class="eyebrow">Governed by Beyryl Technarchy</div>
+          <h2 class="section-title">Trust should be enforced by the system.</h2>
+          <p class="section-copy">
+            Beyryl Technarchy embeds human-defined rules into the technology itself.
+            Security controls, approvals, policy checks, and evidence become part of
+            how the environment operates—not an audit exercise performed afterward.
+          </p>
+
+          <div class="principles">
+            <div class="principle">
+              <div class="principle-index">01</div>
+              <div>
+                <h3>Rules become controls</h3>
+                <p>Policies are translated into enforceable system behavior.</p>
+              </div>
+            </div>
+
+            <div class="principle">
+              <div class="principle-index">02</div>
+              <div>
+                <h3>Actions produce evidence</h3>
+                <p>Important decisions and changes remain attributable and auditable.</p>
+              </div>
+            </div>
+
+            <div class="principle">
+              <div class="principle-index">03</div>
+              <div>
+                <h3>Humans retain authority</h3>
+                <p>People define policy, approve exceptions, and remain accountable.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="governance-visual reveal" aria-label="Technarchy governance model">
+          <div class="ring ring-1"></div>
+          <div class="ring ring-2"></div>
+          <div class="ring ring-3"></div>
+
+          <div class="governance-core">
+            <span>Technarchy</span>
+          </div>
+
+          <div class="orbit-label one">Policy</div>
+          <div class="orbit-label two">Evidence</div>
+          <div class="orbit-label three">Security</div>
+          <div class="orbit-label four">Human authority</div>
+
+          <div class="governance-caption">Where technology is law, precision is trust.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="partners">
+      <div class="container">
+        <div class="reveal">
+          <div class="eyebrow">Built for delivery</div>
+          <h2 class="section-title">One foundation. Two operating models.</h2>
+          <p class="section-copy">
+            Beyryl Vessel supports organizations building their own AI capability and
+            partners delivering governed AI environments across multiple clients.
+          </p>
+        </div>
+
+        <div class="audience-grid">
+          <article class="audience-card reveal">
+            <span class="audience-tag">Enterprises</span>
+            <span class="large-index" aria-hidden="true">01</span>
+            <h3>Your organization’s AI foundation.</h3>
+            <p>
+              Build intelligence around your data, policies, operating model, and
+              risk requirements—without starting from a generic consumer experience.
+            </p>
+          </article>
+
+          <article class="audience-card reveal">
+            <span class="audience-tag">MSPs + delivery partners</span>
+            <span class="large-index" aria-hidden="true">02</span>
+            <h3>A repeatable foundation for every client.</h3>
+            <p>
+              Deliver governed AI environments without turning every customer
+              engagement into a bespoke infrastructure project.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="surface-section" id="company">
+      <div class="container">
+        <div class="reveal">
+          <div class="eyebrow">Designed as a complete system</div>
+          <h2 class="section-title">Intelligence needs more than a model.</h2>
+          <p class="section-copy">
+            Beyryl brings the essential layers together while preserving flexibility
+            across cloud and model ecosystems. The details remain deliberate. The
+            operating outcome remains clear.
+          </p>
+        </div>
+
+        <div class="architecture">
+          <div class="architecture-node reveal">
+            <div class="architecture-label">Organization</div>
+            <div class="architecture-value">Data boundaries, policies, identity, and operating requirements</div>
+            <div class="architecture-state">Defined</div>
+          </div>
+
+          <div class="architecture-node reveal">
+            <div class="architecture-label">Beyryl Vessel</div>
+            <div class="architecture-value">A dedicated, governed environment for enterprise intelligence</div>
+            <div class="architecture-state">Provisioned</div>
+          </div>
+
+          <div class="architecture-node reveal">
+            <div class="architecture-label">Core foundations</div>
+            <div class="architecture-value">Intelligence · Knowledge · Governance · Operations</div>
+            <div class="architecture-state">Operational</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" id="briefing">
+      <div class="container">
+        <div class="cta-panel reveal">
+          <div class="eyebrow">Beyryl Vessel</div>
+          <h2>Your AI. Your data. Your Vessel.</h2>
+          <p>
+            Build an AI foundation designed around your organization—and governed
+            from the beginning.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button-primary" href="#briefing" data-open-modal>
+              Request a private briefing
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <div class="footer-inner">
-      <span>&copy; 2026 Beyryl</span>
-      <div class="partner-ticker" id="partner-ticker">Harvard Innovation Labs member</div>
+  <footer class="site-footer">
+    <div class="container footer-layout">
+      <div class="footer-lockup">
+        <strong>BEYRYL VESSEL</strong>
+        <span>Private AI Infrastructure · Governed by Beyryl Technarchy</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="#vessel">Vessel</a>
+        <a href="#technarchy">Technarchy</a>
+        <a href="#partners">Partners</a>
+        <a href="#company">Company</a>
+        <span>© 2026 Beyryl</span>
+      </div>
     </div>
   </footer>
 
-  <script src="assets/load-components.js?v=2.2"></script>
-  <script src="assets/email-handler.js?v=2.1"></script>
+  <div class="modal" id="briefingModal" role="dialog" aria-modal="true" aria-labelledby="briefingTitle">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close briefing form">×</button>
+
+      <div class="eyebrow">Private briefing</div>
+      <h2 id="briefingTitle">Explore Beyryl Vessel.</h2>
+      <p>
+        Tell us a little about your organization and what you are exploring.
+        The Beyryl team will follow up to arrange a private briefing.
+      </p>
+
+      <form
+        id="briefingForm"
+        action="https://formspree.io/f/mwpqayaw"
+        method="POST"
+      >
+        <div class="form-grid">
+          <div class="field">
+            <label for="name">Name</label>
+            <input
+              id="name"
+              name="name"
+              autocomplete="name"
+              placeholder="Your name"
+              maxlength="100"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="work-email">Work email</label>
+            <input
+              id="work-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="you@company.com"
+              maxlength="254"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="company-name">Company</label>
+            <input
+              id="company-name"
+              name="company"
+              autocomplete="organization"
+              placeholder="Company name"
+              maxlength="160"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="role">Role</label>
+            <input
+              id="role"
+              name="role"
+              autocomplete="organization-title"
+              placeholder="Your role"
+              maxlength="160"
+            />
+          </div>
+
+          <div class="field full">
+            <label for="brief">What are you exploring?</label>
+            <textarea
+              id="brief"
+              name="brief"
+              maxlength="2000"
+              placeholder="Enterprise AI infrastructure, MSP delivery, governance, private deployment..."
+            ></textarea>
+          </div>
+        </div>
+
+        <button class="button-primary form-submit" type="submit">Request briefing</button>
+        <p class="form-note">By submitting this form, you agree that Beyryl may contact you regarding your request.</p>
+      </form>
+    </div>
+  </div>
+
   <script>
-    (function () {
-      const ticker = document.getElementById('partner-ticker');
-      if (!ticker) return;
-      const labels = [
-        'Harvard Innovation Labs member',
-        'Built-in Colorado',
-        'Microsoft Partner',
-        'AWS Partner',
-        'Google Partner',
-        'Anthropic Partner'
-      ];
-      let i = 0;
-      setInterval(function () {
-        i = (i + 1) % labels.length;
-        ticker.textContent = labels[i];
-      }, 3200);
-    })();
+    const header = document.getElementById("siteHeader");
+    const menuButton = document.getElementById("mobileMenuButton");
+    const navLinks = document.getElementById("navLinks");
+    const modal = document.getElementById("briefingModal");
+    const modalClose = document.getElementById("modalClose");
+    const openModalLinks = document.querySelectorAll("[data-open-modal]");
+
+    const updateHeader = () => {
+      header.classList.toggle("scrolled", window.scrollY > 18);
+    };
+
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    updateHeader();
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const openModal = (event) => {
+      event.preventDefault();
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+      setTimeout(() => document.getElementById("name").focus(), 80);
+    };
+
+    const closeModal = () => {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    };
+
+    openModalLinks.forEach((link) => link.addEventListener("click", openModal));
+    modalClose.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeModal();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("open")) {
+        closeModal();
+      }
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
   </script>
+
+  <script src="assets/email-handler.js?v=3.0"></script>
 </body>
 </html>
