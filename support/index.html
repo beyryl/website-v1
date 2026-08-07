@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Beyryl Support for help with Beyryl products and services." />
+  <title>Beyryl Support</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/beyryl-logo_hex.svg" />
+  <style>
+    :root {
+      --beryl: #50c878;
+      --graphite: #121212;
+      --graphite-2: #181b1a;
+      --mist: #f7f9f7;
+      --muted: #a7b0aa;
+      --line: rgba(255, 255, 255, 0.11);
+      --max-width: 980px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--mist);
+      background:
+        radial-gradient(circle at 18% 10%, rgba(80, 200, 120, 0.10), transparent 26%),
+        radial-gradient(circle at 84% 18%, rgba(0, 194, 255, 0.08), transparent 22%),
+        var(--graphite);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin-inline: auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(18, 18, 18, 0.86);
+      backdrop-filter: blur(18px);
+    }
+
+    nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-weight: 760;
+      letter-spacing: 0.08em;
+    }
+
+    .brand img { width: 38px; height: 38px; }
+    .brand strong { color: var(--beryl); }
+
+    .home-link {
+      color: #c9d1cc;
+      text-decoration: none;
+      font-size: 0.92rem;
+    }
+
+    .home-link:hover { color: white; }
+
+    main { padding: 84px 0 96px; }
+
+    .eyebrow {
+      color: var(--beryl);
+      font-size: 0.78rem;
+      font-weight: 750;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 14px 0 18px;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+    }
+
+    .intro {
+      max-width: 720px;
+      margin: 0;
+      color: #bdc6c0;
+      font-size: 1.08rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+      gap: 24px;
+      margin-top: 52px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .card h2 {
+      margin: 0 0 12px;
+      font-size: 1.45rem;
+      letter-spacing: -0.02em;
+    }
+
+    .card p, .card li { color: #aeb8b2; }
+    .card ul { margin: 18px 0 0; padding-left: 20px; }
+
+    form { display: grid; gap: 16px; }
+
+    .field { display: grid; gap: 8px; }
+
+    label {
+      color: #9aa69f;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 13px 14px;
+      color: white;
+      background: rgba(255, 255, 255, 0.035);
+      font: inherit;
+      outline: none;
+    }
+
+    select option { color: #111; }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(80, 200, 120, 0.58);
+      box-shadow: 0 0 0 3px rgba(80, 200, 120, 0.08);
+    }
+
+    button {
+      min-height: 48px;
+      border: 0;
+      border-radius: 999px;
+      padding: 0 22px;
+      color: #06150b;
+      background: var(--beryl);
+      font: inherit;
+      font-weight: 760;
+      cursor: pointer;
+    }
+
+    button:hover { background: #69d58a; }
+
+    .form-note {
+      margin: 0;
+      color: #77837c;
+      font-size: 0.78rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 30px 0;
+      color: #77837c;
+      font-size: 0.82rem;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .footer-links a { color: #9aa69f; text-decoration: none; }
+    .footer-links a:hover { color: white; }
+
+    @media (max-width: 760px) {
+      nav { min-height: 68px; }
+      main { padding-top: 64px; }
+      .layout { grid-template-columns: 1fr; }
+      .card { padding: 24px; border-radius: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav aria-label="Support navigation">
+        <a class="brand" href="/" aria-label="Beyryl home">
+          <img src="../assets/beyryl-logo_hex.svg" alt="" aria-hidden="true" />
+          <span><strong>B</strong>EYRỲL</span>
+        </a>
+        <a class="home-link" href="/">Back to beyryl.com</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="eyebrow">Customer support</div>
+      <h1>How can we help?</h1>
+      <p class="intro">
+        Use this page to contact Beyryl Support for product questions, account or access issues,
+        technical problems, and other assistance with Beyryl products and services.
+      </p>
+
+      <div class="layout">
+        <section class="card" aria-labelledby="support-info-title">
+          <h2 id="support-info-title">Beyryl Support</h2>
+          <p>
+            Submit the support form and our team will follow up using the email address you provide.
+            Please include enough detail for us to understand and investigate your request.
+          </p>
+          <ul>
+            <li>Product and technical support</li>
+            <li>Account and access assistance</li>
+            <li>Deployment and configuration questions</li>
+            <li>Billing or Marketplace-related questions</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="support-form-title">
+          <h2 id="support-form-title">Contact support</h2>
+          <form action="https://formspree.io/f/mwpqayaw" method="POST">
+            <input type="hidden" name="request_type" value="Beyryl customer support" />
+            <input type="hidden" name="source" value="https://beyryl.com/support" />
+
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" autocomplete="name" maxlength="100" required />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" maxlength="254" required />
+            </div>
+
+            <div class="field">
+              <label for="company">Company</label>
+              <input id="company" name="company" autocomplete="organization" maxlength="160" />
+            </div>
+
+            <div class="field">
+              <label for="topic">Support topic</label>
+              <select id="topic" name="topic" required>
+                <option value="" selected disabled>Select a topic</option>
+                <option>Product or technical issue</option>
+                <option>Account or access</option>
+                <option>Deployment or configuration</option>
+                <option>Billing or Marketplace</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="message">How can we help?</label>
+              <textarea id="message" name="message" maxlength="4000" required></textarea>
+            </div>
+
+            <button type="submit">Submit support request</button>
+            <p class="form-note">
+              By submitting this form, you agree that Beyryl may contact you regarding your support request.
+            </p>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <span>© 2026 Beyryl</span>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/privacy">Privacy</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
