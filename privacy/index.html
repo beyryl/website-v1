@@ -1,60 +1,376 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Beyryl Privacy Policy." />
+  <meta name="theme-color" content="#121212" />
+  <meta name="color-scheme" content="dark" />
   <title>Beyryl Privacy Policy</title>
-  <meta name="description" content="Beyryl Privacy Policy" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <meta name="theme-color" content="#f3f5f9" />
-  <meta name="color-scheme" content="light" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <link rel="icon" type="image/svg+xml" href="../assets/beyryl-logo_hex.svg" />
+
+  <style>
+    :root {
+      --beryl: #50c878;
+      --emerald: #014421;
+      --graphite: #121212;
+      --graphite-2: #181b1a;
+      --mist: #f7f9f7;
+      --muted: #a7b0aa;
+      --line: rgba(255, 255, 255, 0.11);
+      --cyan: #00c2ff;
+      --violet: #7a3ff0;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+      --max-width: 980px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--mist);
+      background:
+        radial-gradient(circle at 18% 10%, rgba(80, 200, 120, 0.10), transparent 26%),
+        radial-gradient(circle at 84% 18%, rgba(0, 194, 255, 0.08), transparent 22%),
+        var(--graphite);
+      font-family:
+        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.28;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--line);
+      background: rgba(18, 18, 18, 0.86);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--mist);
+      text-decoration: none;
+      font-weight: 760;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 12px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+      box-shadow: inset 0 0 20px rgba(80, 200, 120, 0.03);
+    }
+
+    .brand-mark img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .brand strong {
+      color: var(--beryl);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: #c9d1cc;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      transition: color 140ms ease;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    main {
+      padding: 84px 0 96px;
+    }
+
+    .hero {
+      padding-bottom: 48px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--beryl);
+      font-size: 0.78rem;
+      font-weight: 750;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--beryl), var(--cyan), var(--violet));
+      box-shadow: 0 0 16px rgba(0, 194, 255, 0.35);
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 16px 0 18px;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+    }
+
+    h1 .accent {
+      color: transparent;
+      background: linear-gradient(90deg, #f5fff7 0%, var(--beryl) 42%, var(--cyan) 76%, #d7c8ff 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 0;
+      color: #bdc6c0;
+      font-size: 1.08rem;
+    }
+
+    .policy-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 24px;
+      border: 1px solid rgba(80, 200, 120, 0.22);
+      border-radius: 999px;
+      padding: 8px 13px;
+      color: #98a49d;
+      background: rgba(80, 200, 120, 0.045);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .policy-meta::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--beryl);
+      box-shadow: 0 0 12px rgba(80, 200, 120, 0.62);
+    }
+
+    .policy-shell {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(80, 200, 120, 0.07), transparent 26%),
+        rgba(255, 255, 255, 0.022);
+      box-shadow: var(--shadow);
+    }
+
+    .policy-section {
+      padding: 30px 34px;
+      border-top: 1px solid var(--line);
+    }
+
+    .policy-section:first-child {
+      border-top: 0;
+    }
+
+    .policy-section h2 {
+      margin: 0 0 14px;
+      color: var(--mist);
+      font-size: clamp(1.28rem, 2.4vw, 1.62rem);
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+    }
+
+    .policy-section p {
+      margin: 0;
+      color: #aeb8b2;
+      font-size: 1rem;
+      line-height: 1.78;
+    }
+
+    .policy-section p + p {
+      margin-top: 15px;
+    }
+
+    .policy-section.lead p {
+      color: #c5cdc8;
+      font-size: 1.03rem;
+    }
+
+    .policy-index {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: #718078;
+      font-size: 0.68rem;
+      font-weight: 740;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 30px 0;
+      color: #77837c;
+      font-size: 0.82rem;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #9aa69f;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        min-height: 68px;
+      }
+
+      .nav-links {
+        gap: 14px;
+        font-size: 0.82rem;
+      }
+
+      main {
+        padding-top: 64px;
+      }
+
+      .hero {
+        padding-bottom: 36px;
+      }
+
+      .policy-shell {
+        border-radius: 20px;
+      }
+
+      .policy-section {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .nav-links a:first-child {
+        display: none;
+      }
+    }
+  </style>
 </head>
-<body class="bg-[#f3f5f9] text-slate-900 antialiased">
-  <header class="sticky top-0 z-50">
-    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-slate-200 z-50">
-      <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="/" class="flex items-center gap-3 group" aria-label="Beyryl home">
-          <img src="../assets/beyryl-logo_hex.svg" alt="Beyryl Hex Logo" class="h-8 w-8 transition-opacity group-hover:opacity-90" />
-          <span class="text-xl font-semibold tracking-wide text-slate-900">Beyryl</span>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav" aria-label="Privacy navigation">
+        <a class="brand" href="/" aria-label="Beyryl home">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="../assets/beyryl-logo_hex.svg" alt="" />
+          </span>
+          <span><strong>B</strong>EYRỲL</span>
         </a>
-        <div class="hidden md:flex items-center gap-8 text-slate-600">
-          <a href="/#product" class="hover:text-slate-900">Product</a>
-          <a href="/#features" class="hover:text-slate-900">Technology</a>
-          <a href="/#contact" class="hover:text-slate-900">Contact</a>
+
+        <div class="nav-links">
+          <a href="/support/">Support</a>
+          <a href="/">Back to beyryl.com</a>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   </header>
 
-  <main class="min-h-screen pt-32 pb-20 px-6">
-    <article class="max-w-4xl mx-auto">
-      <div class="mb-12 border-b border-slate-200 pb-10">
-        <p class="text-sm font-medium text-[#5b6f8f] mb-4">Privacy</p>
-        <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-          Beyryl
-          <span class="bg-gradient-to-r from-[#2cc8d6] via-[#5ba8ea] to-[#6675e8] bg-clip-text text-transparent"> Privacy Policy</span>
-        </h1>
-        <p class="text-slate-500">Effective date: April 23, 2026</p>
-      </div>
+  <main>
+    <div class="container">
+      <section class="hero" aria-labelledby="privacy-title">
+        <div class="eyebrow">Privacy</div>
+        <h1 id="privacy-title">Beyryl <span class="accent">Privacy Policy.</span></h1>
+        <p class="intro">
+          This policy explains how Beyryl collects, uses, discloses, and otherwise processes personal information across our websites, applications, platforms, and related services.
+        </p>
+        <div class="policy-meta">Effective April 23, 2026</div>
+      </section>
 
-      <div class="space-y-10 text-slate-600 leading-relaxed text-base md:text-lg">
-        <section class="space-y-4">
+      <article class="policy-shell">
+        <section class="policy-section lead">
           <p>Beyryl (&ldquo;Beyryl,&rdquo; &ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) respects your privacy. This Privacy Policy explains how we collect, use, disclose, and otherwise process personal information when you visit our websites, request information, create an account, receive or accept an invitation, use Beyryl applications, platforms, or related services, or otherwise interact with us (collectively, the &ldquo;Services&rdquo;).</p>
           <p>This Privacy Policy also explains your rights and choices with respect to your personal information.</p>
           <p>This Privacy Policy does not apply to third-party websites, services, or applications that are not operated by Beyryl, even if they are linked from our Services.</p>
         </section>
 
-        <section class="space-y-4">
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Customer data and organization-managed accounts</h2>
+        <section class="policy-section">
+          <span class="policy-index">01</span>
+          <h2>Customer data and organization-managed accounts</h2>
           <p>Beyryl is primarily a business service. In many cases, Beyryl processes information on behalf of a customer organization that provides access to the Services for its employees, contractors, or other authorized users.</p>
           <p>If Beyryl processes personal information on behalf of a customer in connection with that customer&rsquo;s use of the Services, Beyryl acts as a service provider or processor under the applicable customer agreement. In those cases, the customer organization controls how the relevant data is used and many privacy requests should be directed to that customer first.</p>
           <p>If your employer, customer, partner, or other organization provides you with access to Beyryl, that organization may control your account, tenant settings, permissions, and certain content associated with your use of the Services.</p>
         </section>
 
-        <section class="space-y-4">
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Information we collect</h2>
+        <section class="policy-section">
+          <span class="policy-index">02</span>
+          <h2>Information we collect</h2>
           <p>We collect personal information that you provide directly to us, information we collect automatically when you use the Services, and information we receive from customers, partners, administrators, and other sources.</p>
           <p>The information you provide directly to us may include your name, work email address, company name, job title, phone number, mailing address, support communications, survey responses, and any other information you choose to provide to us.</p>
           <p>If you create an account, receive an invitation, or use an organization-managed account, we may collect account, profile, and identity information such as login identifiers, invitation status, account credentials or authentication metadata, organization or tenant identifiers, role assignments, and preferences.</p>
@@ -65,8 +381,9 @@
           <p>We may also receive information from customer administrators, partners, integration providers, service providers, and publicly available sources where necessary to create accounts, administer tenants, provide support, improve the Services, market our Services, or comply with law.</p>
         </section>
 
-        <section class="space-y-4">
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">How we use personal information</h2>
+        <section class="policy-section">
+          <span class="policy-index">03</span>
+          <h2>How we use personal information</h2>
           <p>We use personal information to provide, operate, maintain, administer, and support the Services.</p>
           <p>We also use personal information to authenticate users, manage invitations and access controls, create and administer accounts and tenants, provision customer environments, process billing and subscription operations, respond to inquiries, provide customer support, and communicate with you about transactions, product changes, security notices, service updates, and events.</p>
           <p>We use personal information to monitor performance, diagnose errors, investigate incidents, prevent fraud and misuse, protect Beyryl, our customers, and others, comply with legal obligations, and enforce our agreements and policies.</p>
@@ -75,8 +392,9 @@
           <p>Where applicable law requires a legal basis for processing, Beyryl relies on one or more of the following: performance of a contract, legitimate interests, consent, and compliance with legal obligations.</p>
         </section>
 
-        <section class="space-y-4">
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">How we disclose personal information</h2>
+        <section class="policy-section">
+          <span class="policy-index">04</span>
+          <h2>How we disclose personal information</h2>
           <p>We may disclose personal information to our affiliates and related entities.</p>
           <p>We may disclose personal information to service providers, contractors, and subprocessors that help us operate the Services and our business, including providers of hosting, cloud infrastructure, authentication, payment processing, email delivery, monitoring, observability, analytics, customer support, professional services, and security functions.</p>
           <p>We may disclose personal information to customer organizations and their authorized administrators when accounts are created, provisioned, or managed on their behalf, or when those organizations are entitled to manage the environment in which the account is used.</p>
@@ -87,39 +405,45 @@
           <p>Beyryl does not sell personal information.</p>
         </section>
 
-        <section class="space-y-4">
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Customer content and AI-related use</h2>
+        <section class="policy-section">
+          <span class="policy-index">05</span>
+          <h2>Customer content and AI-related use</h2>
           <p>Beyryl may process customer content only as necessary to provide, secure, maintain, support, and improve the Services, and as otherwise permitted by applicable agreements and law.</p>
           <p>Unless Beyryl clearly discloses otherwise in a product notice, customer agreement, or feature-specific workflow, Beyryl will not use customer content submitted through business Services to train general-purpose models for third parties.</p>
         </section>
 
-        <section class="space-y-4">
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Cookies and similar technologies</h2>
+        <section class="policy-section">
+          <span class="policy-index">06</span>
+          <h2>Cookies and similar technologies</h2>
           <p>Beyryl may use cookies and similar technologies to operate our websites and Services, remember preferences, support login and security functions, understand usage, and improve performance.</p>
           <p>You can often control cookies through your browser settings. If Beyryl provides a cookie banner, preference center, or similar choice mechanism, you may also manage your choices there.</p>
         </section>
 
-        <section class="space-y-4">
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Data retention</h2>
+        <section class="policy-section">
+          <span class="policy-index">07</span>
+          <h2>Data retention</h2>
           <p>We retain personal information for as long as reasonably necessary for the purposes described in this Privacy Policy, including to provide the Services, maintain security, resolve disputes, enforce agreements, comply with legal obligations, and keep appropriate business and audit records.</p>
           <p>Retention periods vary depending on the type of information, the sensitivity of the information, the feature or workflow involved, our contractual commitments, and applicable legal requirements.</p>
           <p>We may retain archived copies, backups, logs, and de-identified information for longer where permitted or required by law.</p>
         </section>
 
-        <section class="space-y-4">
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Security</h2>
+        <section class="policy-section">
+          <span class="policy-index">08</span>
+          <h2>Security</h2>
           <p>Beyryl uses technical, administrative, and organizational safeguards designed to protect personal information against unauthorized access, loss, misuse, alteration, or disclosure.</p>
           <p>No method of transmission over the Internet or method of storage is completely secure, and Beyryl cannot guarantee absolute security.</p>
         </section>
 
-        <section class="space-y-4">
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">International transfers</h2>
+        <section class="policy-section">
+          <span class="policy-index">09</span>
+          <h2>International transfers</h2>
           <p>Beyryl may process personal information in the United States and other countries where Beyryl or its service providers operate.</p>
           <p>When required by applicable law, Beyryl uses appropriate safeguards for cross-border transfers, such as contractual protections or other legally recognized transfer mechanisms.</p>
         </section>
 
-        <section class="space-y-4">
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Your rights and choices</h2>
+        <section class="policy-section">
+          <span class="policy-index">10</span>
+          <h2>Your rights and choices</h2>
           <p>Depending on where you live, you may have rights regarding your personal information, including rights to access, correct, delete, restrict, object to certain processing, or receive a portable copy of your information. You may also have the right to withdraw consent where processing is based on consent and to opt out of marketing communications.</p>
           <p>You may exercise marketing choices by using the unsubscribe link in a message or by contacting us using the details below.</p>
           <p>If you want to exercise privacy rights, contact us using the contact details below. We may need to verify your identity before fulfilling a request.</p>
@@ -127,25 +451,29 @@
           <p>Beyryl will not discriminate against you for exercising privacy rights available under applicable law.</p>
         </section>
 
-        <section class="space-y-4">
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Children</h2>
+        <section class="policy-section">
+          <span class="policy-index">11</span>
+          <h2>Children</h2>
           <p>The Services are intended for business and professional use and are not directed to children. Beyryl does not knowingly collect personal information from children under 16.</p>
           <p>If you believe a child has provided personal information to Beyryl, please contact us and we will take appropriate steps to investigate and, where appropriate, delete the information.</p>
         </section>
 
-        <section class="space-y-4">
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Changes to this Privacy Policy</h2>
+        <section class="policy-section">
+          <span class="policy-index">12</span>
+          <h2>Changes to this Privacy Policy</h2>
           <p>We may update this Privacy Policy from time to time. When we do, we will post the updated version on this page and revise the effective date above. If required by law, we will provide additional notice.</p>
         </section>
-      </div>
-    </article>
+      </article>
+    </div>
   </main>
 
-  <footer class="border-t border-slate-200 py-8 text-sm text-slate-600 bg-[#eef2f8]">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center w-full gap-2">
-      <span>&copy; 2025 Beyryl</span>
-      <a href="/privacy" class="text-slate-600 hover:text-slate-900 sm:ml-6">Privacy</a>
-      <span class="sm:ml-auto text-slate-500 sm:text-right w-full sm:w-auto">A member of the Harvard Innovation Labs</span>
+  <footer>
+    <div class="container footer-row">
+      <span>&copy; 2026 Beyryl</span>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/support/">Support</a>
+      </div>
     </div>
   </footer>
 </body>
